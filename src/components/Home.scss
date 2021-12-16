@@ -1,0 +1,44 @@
+@import "../App.scss";
+
+
+.firstsection{
+    section{
+        margin:10% 0;
+        h1{
+            font-size: 3.5em;
+            color: $purple;
+            font-weight: 800;
+        }
+        p{
+            line-height: 1.5;
+        }
+        .row{
+            padding:0 5%;
+            button{
+                padding:1.5% 3%;
+                width: 25%;
+                margin:0 2%
+            }
+            
+        }
+
+    }
+}
+
+.secondsection{
+    .heading{
+        text-align: center;
+        font-size: 3.5em;
+        color:$purple;
+        margin:15% 0;
+    }
+    .row{
+        margin:5% 2%;
+        h1{
+            color:$purple;
+        }
+        p{
+            line-height: 2;
+        }
+    }
+}
