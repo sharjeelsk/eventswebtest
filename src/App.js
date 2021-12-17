@@ -13,6 +13,7 @@ import MyAccount from "./components/Dashboard/MyAccount/MyAccount";
 import EventDetail from './components/Dashboard/EventDetail'
 import CreateEvent from "./components/Dashboard/CreateEventD/CreateEvent";
 import CreateEvent2 from './components/Dashboard/CreateEventD/CreateEvent2'
+import EditEvent from "./components/Dashboard/CreateEventD/EditEvent";
 import MyServices from './components/Dashboard/MyAccount/MyServices/MyServices'
 import AddServices from "./components/Dashboard/MyAccount/MyServices/AddServices";
 import ChatsT from './components/Dashboard/testchats/ChatsT'
@@ -21,6 +22,7 @@ import CreateBid from "./components/Dashboard/MyBids/CreateBid";
 import OrganizerBid from "./components/Dashboard/MyBids/OrganizerBid";
 import MyApprovals from "./components/Dashboard/MyAccount/MyApprovals/MyApprovals";
 import Reminders from "./components/Dashboard/Reminders/Reminders";
+
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
       <Route path="/myaccount" component={MyAccount} />
       <Route path="/createevent" component={CreateEvent} />
       <Route path="/createevent2" component={CreateEvent2} />
+      <Route path="/editevent" component={EditEvent} />
       <Route path="/myservices" component={MyServices} />
       <Route path="/addservices" component={AddServices} />
       <Route path="/testchats" component={ChatsT} />

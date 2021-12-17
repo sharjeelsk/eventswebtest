@@ -68,7 +68,7 @@ function MyAccount(props) {
         <div className="  " onClick={()=>setDisplay(false)}>
 
         
-        <div className="row align-items-center profilediv">
+        <div className="shadow-sm row align-items-center profilediv">
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 imagediv">
         {userInfo.img?<img src={`${process.env.REACT_APP_DEVELOPMENT}/api/user/image/${userInfo.img}`} alt="img" />:<img src={profile} alt="profile" />}
         </div>
@@ -83,11 +83,11 @@ function MyAccount(props) {
         </div>
         
         <div className="row justify-content-between approvaldiv">
-        <div onClick={()=>props.history.push("/myapprovals")} className="row align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div onClick={()=>props.history.push("/myapprovals")} className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <GradingIcon className="cardIcon" />
             <p className="cardheading">My Approvals</p>
         </div>
-        <div onClick={()=>props.history.push("/myservices")} className="row align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div onClick={()=>props.history.push("/myservices")} className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <HomeRepairServiceIcon className="cardIcon" />
             <p className="cardheading">My Services</p>
         </div>
@@ -95,11 +95,11 @@ function MyAccount(props) {
 
 
         <div className="row justify-content-between approvaldiv">
-        <div className="row align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <GroupsIcon className="cardIcon" />
             <p className="cardheading">My Groups</p>
         </div>
-        <div className="row align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <PersonSearchIcon className="cardIcon" />
             <p className="cardheading">Find Vendors</p>
         </div>

@@ -70,6 +70,7 @@ const MyCreation = (props) => {
 
                       <div className="row justify-content-between cardbuttondiv">
                           <Button  
+                          onClick={()=>props.history.push("/editevent",item)}
                           className="cardbutton"
                           startIcon={<ModeEditRoundedIcon />}
                           variant="text">Edit</Button>

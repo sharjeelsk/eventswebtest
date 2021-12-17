@@ -13,18 +13,22 @@ import Tooltip from '@mui/material/Tooltip';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import {storeUserInfo} from '../redux/user/userActions'
+import OwnMarker from '../utils/Marker/OwnMarker';
 
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
     const [data,setData]=React.useState([])
     const [flag,setFlag]=React.useState(false)
+    const [error,setError]=React.useState("")
     console.log("dashboard props",props)
-    const getpos = async ()=>{
-        await navigator.geolocation.getCurrentPosition(loc=>console.log(loc))
+    const getGeo = async ()=>{
+      window.navigator.geolocation.getCurrentPosition((loca)=>{
+        setLocation({center:{lat:loca.coords.latitude,lng:loca.coords.longitude},zoom:18})
+      },(err)=>setError(err.message));
     }
     React.useEffect(()=>{
-        getpos()
+      getGeo()
          axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/event/all-event`,{headers:{token:props.userToken}})
           .then(res=>{
             if(res.data.msg==="Success" && res.data.result.length>0){
@@ -46,7 +50,7 @@ const Dashboard = (props) => {
 
           
     },[flag])
-    
+    console.log(data);
     return (
         <div className="row">
           
@@ -68,11 +72,18 @@ const Dashboard = (props) => {
           defaultCenter={location.center}
           defaultZoom={location.zoom}
         >
-          <Marker
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
+        <OwnMarker 
+      lat = {location.center.lat}
+      lng={location.center.lng}
+      text="My Location"
+      />
+          {data.map((marker,index)=>(
+            <Marker
+            lat={marker.location.latitude}
+            lng={marker.location.longitude}
+            text={marker.name}
           />
+          ))}
         </GoogleMapReact>
       </div>
             <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>    

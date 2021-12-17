@@ -48,87 +48,85 @@ function BidsScreen(props) {
         <Tab value="allbids" label="All Bids" />
       </Tabs>
     </Box>
+    <div className="row mt-3 bid-parent">
     {
             myBid.length>0 && value==="mybid"?(
                 myBid.map((item,index)=>(
-                    <div className="bid-container" key={index}>
-                        <div className="row align-items-center justify-content-between">
-                        <h2 className="name">{item.userId.name}</h2>
-                        <p className="price">$ {item.totalPrice}</p>
-                        </div>
-                        <p className="org">{item.userId.organisation}</p>
-                        <p className="description">{item.description}</p>
-                        {
-                            item.services.length>0?(
-                                item.services.map((services,indexc)=>(
-                                    <div className="shadow-sm services-container">
-                                        <div className="firstrow row align-items-center">
-                                            <div className="index">
-                                            <h3>{indexc+1}</h3>
-                                            </div>
-
-                                            <div className="maincategory">
-                                            <h3>{services.category}</h3>
-                                            </div>
-                                        </div>
-
-                                        <div className="last-container">
-                                        <p className="subcategory">{services.subCategory}</p>
-                                        <div className="secondrow row align-items-center justify-content-between">
-                                        <p className='s-quantity'>Quantity {services.quantity}</p>
-                                        <p className="s-price">$ {services.price}</p>
-                                        </div>
-                                        </div>
-
-                                    </div>
-                                ))
-                            ):<p>No Services</p>
-                        }
+                    <div className="shadow-sm col-6 bid-parent-container" key={index}>
+                    <div className="">
+                    <div className="row justify-content-between">
+                    <h3 className="name col-9">{item.userId.name}</h3>
+                    <p className="price col-3">${item.totalPrice}</p>
                     </div>
+
+                    <p className="for">{item.userId.organisation}</p>
+                    <p className="description">{item.description}</p>
+
+                    {
+                        item.services.map((service,sindex)=>(
+                            <div key={sindex} className="row shadow-sm services-container">
+                                <div className="col-1">
+                                <p className="index">{sindex+1}</p>
+                                </div>
+
+                                <div className="col-7">
+                                <p className="service-subcat">{service.subCategory}</p>
+                                <p className="service-cat">{service.category}</p>
+                                </div>
+
+                                <div className="col-3">
+                                <p className="service-price">${service.price}</p>
+                                <p className="service-quantity">{service.quantity}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                    </div>
+                </div>
                 ))
             ):null
         }
+        </div>
         {/* all ibds starts */}
+        <div className="row bid-parent">
         {
             bids.length>0 && value==="allbids"?(
                 bids.map((item,index)=>(
-                    <div className="bid-container" key={index}>
-                        <div className="row align-items-center justify-content-between">
-                        <h2 className="name">{item.userId.name}</h2>
-                        <p className="price">$ {item.totalPrice}</p>
-                        </div>
-                        <p className="org">{item.userId.organisation}</p>
-                        <p className="description">{item.description}</p>
-                        {
-                            item.services.length>0?(
-                                item.services.map((services,indexc)=>(
-                                    <div className="shadow-sm services-container">
-                                        <div className="firstrow row align-items-center">
-                                            <div className="index">
-                                            <h3>{indexc+1}</h3>
-                                            </div>
-
-                                            <div className="maincategory">
-                                            <h3>{services.category}</h3>
-                                            </div>
-                                        </div>
-
-                                        <div className="last-container">
-                                        <p className="subcategory">{services.subCategory}</p>
-                                        <div className="secondrow row align-items-center justify-content-between">
-                                        <p className='s-quantity'>Quantity {services.quantity}</p>
-                                        <p className="s-price">$ {services.price}</p>
-                                        </div>
-                                        </div>
-
-                                    </div>
-                                ))
-                            ):<p>No Services</p>
-                        }
+                    <div className="shadow-sm col-5 mx-auto bid-parent-container" key={index}>
+                    <div className="">
+                    <div className="row justify-content-between">
+                    <h3 className="name col-9">{item.userId.name}</h3>
+                    <p className="price col-3">${item.totalPrice}</p>
                     </div>
+
+                    <p className="for">{item.userId.organisation}</p>
+                    <p className="description">{item.description}</p>
+
+                    {
+                        item.services.map((service,sindex)=>(
+                            <div key={sindex} className="row shadow-sm services-container">
+                                <div className="col-1">
+                                <p className="index">{sindex+1}</p>
+                                </div>
+
+                                <div className="col-7">
+                                <p className="service-subcat">{service.subCategory}</p>
+                                <p className="service-cat">{service.category}</p>
+                                </div>
+
+                                <div className="col-3">
+                                <p className="service-price">${service.price}</p>
+                                <p className="service-quantity">{service.quantity}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                    </div>
+                </div>
                 ))
             ):null
         }
+        </div>
 
             {/* end of block */}
         </div>

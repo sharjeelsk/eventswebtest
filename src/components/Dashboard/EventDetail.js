@@ -139,6 +139,7 @@ function EventDetail(props) {
         </GoogleMapReact>
         </div>
        
+       <div className='shadow-sm eventDetaildiv'>
         <div className="row">
         <div className="col-10">
         <h1>{details.name}</h1>
@@ -166,6 +167,7 @@ function EventDetail(props) {
         <div style={{textAlign:"center"}}>
         <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
+        </div>
         </div>
             {/* end of block */}
         </div>
