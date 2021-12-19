@@ -5,6 +5,7 @@ import iconImage from '../../Images/icon.png'
 import {connect} from 'react-redux'
 import Button from '@mui/material/Button'
 
+
 const Header = (props) => {
 	React.useEffect(()=>{
 
@@ -31,9 +32,9 @@ console.log(props);
 			{props.id==="4"?<Link  className="nav-link active" to="/privacypolicy">Projects</Link>:<Link  className="nav-link"  to="/privacypolicy">Projects</Link>}
 			</li>
 			<li className="nav-item">
-			{props.id==="5"?
-			<Link  className="nav-link active" to="/signup">
-				<Button sx={{fontSize:"1.1rem"}} variant="contained" size="large" className="btn-purple">SignUp</Button>
+			{props.userToken?
+			<Link  className="nav-link active" to="/dashboard">
+				<Button sx={{fontSize:"1.1rem"}} variant="contained" size="large" className="btn-purple">dashboard</Button>
 				</Link>:
 			<Link  className="nav-link"  to="/signup">
 				<Button sx={{fontSize:"1.1rem"}} variant="contained" size="large"  className="btn-purple">SignUp</Button>

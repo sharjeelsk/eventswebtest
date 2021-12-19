@@ -4,6 +4,8 @@ import Button from '@mui/material/Button'
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {connect} from 'react-redux'
 import {updateSocket} from '../../redux/socket/socketActions'
+import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
+import FailureScreen from '../../utils/FailureScreen';
 function ChatDetailT(props) {
     const [message,setMessage]=React.useState("")
     const [newMessages,setNewMessages]=React.useState([])
@@ -81,7 +83,8 @@ function ChatDetailT(props) {
             onClick={()=>handleSubmit()} type="submit">send</Button>
             </div>
 
-        </div>:<div>chat detail</div>}
+        </div>:<FailureScreen icon={<SmsOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} title="You don't have any conversations" />
+       }
         </div>
     )
 }

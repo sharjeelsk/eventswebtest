@@ -13,11 +13,11 @@ const theme = createTheme({
       main: "#5a1e96",
     },
     secondary: {
-      main: "#000",
+      main: "#a1a1a1",
     },
     tertiary:{
       main:"#b66dff"
-    }
+    },
   },
   components:{
     MuiButton:{
@@ -39,6 +39,24 @@ const theme = createTheme({
       }
     },
     MuiTab:{
+      styleOverrides:{
+        root:{
+          '&:focus':{
+            outline:'none'
+          }
+        }
+      }
+    },
+    MuiPagination:{
+      styleOverrides:{
+        root:{
+          '&:focus':{
+            outline:'none'
+          }
+        }
+      }
+    },
+    MuiPaginationItem:{
       styleOverrides:{
         root:{
           '&:focus':{

@@ -10,7 +10,9 @@ import {connect} from 'react-redux'
 import Button from '@mui/material/Button'
 import axios from 'axios'
 import Rating from '@mui/material/Rating';
-
+import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
+import Alert from '@mui/material/Alert'
+import Ratenowdialogue from '../../utils/Ratenowdialogue';
 function OrganizerBid(props) {
     const [display,setDisplay]=React.useState(false);
     const [value, setValue] = React.useState('mybid');
@@ -19,41 +21,34 @@ function OrganizerBid(props) {
     const [flag,setFlag]=React.useState(false)
     const [status,setStatus]=React.useState("")
     const [rating,setRating]=React.useState(0)
+    const [error,setError]=React.useState("")
+    const [open,setOpen]=React.useState(false)
     console.log(rating)
     //const bids = props.location.state
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-    const handleRating = (newValue,id)=>{
-        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/rate-user`,{userId:id,stars:newValue},{headers:{token:props.user.user}})
-        .then(res=>{
-            console.log(res);
-            if(res.data.msg === "Success"){
-                setRating(newValue);
-            }
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-        
-    }
+ 
     console.log(myBid)
     React.useEffect(()=>{
         
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/single-event`, {eventId:props.location.state }, {headers:{token:props.user.user}})
         .then(res=>{
+            setError("")
             console.log(res)
             setStatus(res.data.result.status)
             let array = res.data.result.bids.filter(item=>item.status==="Approved")
             if(array.length>0){
                 setValue("mybid")
             }else{
-                setValue("allbids")    
+                setValue("allbids")   
+                setError("You haven't approved any bids yet") 
             }
             setMyBid(array)
             setBids(res.data.result.bids)
         })
         .catch(err=>{
+            setError("Something went wrong")
             console.log(err)
         })
 
@@ -64,9 +59,11 @@ function OrganizerBid(props) {
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/approve-bid`,{bidId:id},{headers:{token:props.user.user}})
         .then(res=>{    
             console.log(res);
+            setError("")
             setFlag(!flag)
         })
         .catch(err=>{
+            setError("Something went wrong")
             console.log(err);
         })
     }
@@ -108,7 +105,19 @@ function OrganizerBid(props) {
                     <p className="price col-3">${item.totalPrice}</p>
                     </div>
 
+                    <div className="row mx-auto  align-items-center justify-content-between">
                     <p className="for">{item.userId.organisation}</p>
+                    <Ratenowdialogue rightButton="submit" leftButton="cancel" 
+                    description="Vendor reviews help organizers choose the best vendor for a event. Therefore, while it is not mandatory, it is highly recommended for organizers to leave a review for a vendor they have just completed a event with." 
+                    title="Rate vendor" setOpen={setOpen}  open={open} item={item} />
+                    <Button onClick={()=>setOpen(true)}>Rate User</Button>
+                    </div>
+                    <Rating
+                    readOnly 
+                        name="read-only"
+                        value={item.userId.rating.avg}
+                        
+                      />
                     <p className="description">{item.description}</p>
 
                     {
@@ -133,7 +142,7 @@ function OrganizerBid(props) {
                     </div>
                 </div>
                 ))
-            ):<p>You haven't approved</p>
+            ):null
         }
         </div>
         {/* all ibds starts */}
@@ -142,13 +151,23 @@ function OrganizerBid(props) {
             bids.length>0 && value==="allbids"?(
                 bids.map((item,index)=>(
                     <div className="shadow-sm col-5 mx-auto bid-parent-container" key={index}>
+                    
                     <div className="">
                     <div className="row justify-content-between">
-                    <h3 className="name col-9">{item.userId.name}</h3>
-                    <p className="price col-3">${item.totalPrice}</p>
+                    <h3 className="name col-8">{item.userId.name}</h3>
+                    {item.status!=="Approved"?<Button onClick={()=>handleApprove(item._id)} endIcon={<GavelRoundedIcon />} variant="contained">Approve Bid</Button>:null}
                     </div>
 
-                    <p className="for">{item.userId.organisation}</p>
+                    <div className="row justify-content-between mx-auto mt-3">
+                    <p className="for ">{item.userId.organisation}</p>
+                    <p className="price ">${item.totalPrice}</p>
+                    </div>
+                    <Rating
+                    readOnly 
+                        name="read-only"
+                        value={item.userId.rating.avg}
+                        
+                      />
                     <p className="description">{item.description}</p>
 
                     {
@@ -179,6 +198,7 @@ function OrganizerBid(props) {
             {/* end of block */}
         </div>
         </div>
+        {error.length>0?<Alert className="alert" severity="error">{error}</Alert>:null}
     </div>
     )
 }

@@ -38,11 +38,11 @@ function MyApprovals(props) {
         <div onClick={()=>setDisplay(false)}>
         <h1 className="myapprovalsh">My Approvals <HowToRegRoundedIcon /></h1>
 
-        <div className="row bid-parent">
+        <div className="row bid-parent ">
         {
             data.length>0?(
                 data.map((item,index)=>(
-                    <div className="shadow-sm col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mx-auto bid-parent-container" key={index}>
+                    <div className="shadow-sm col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mx-5 bid-parent-container" key={index}>
                         <div className="">
                         <div className="row justify-content-between">
                         <h3 className="name col-9">{item.bid.userId.name}</h3>

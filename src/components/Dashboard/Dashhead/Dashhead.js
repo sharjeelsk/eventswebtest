@@ -12,6 +12,8 @@ import ChatIcon from '@mui/icons-material/Chat';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 
 const Dashhead = (props) => {
     console.log(props);
@@ -58,6 +60,14 @@ const Dashhead = (props) => {
             </div>:
             <div className="menu-container" onClick={()=>props.history.push('chats')}>
             <p><ChatOutlinedIcon /> Chats</p>
+            </div>
+            }
+
+            {id===7?<div className="menu-container-active">
+                <p><NotificationsRoundedIcon /> Reminders</p>
+            </div>:
+            <div className="menu-container" onClick={()=>props.history.push('/reminders')}>
+            <p><NotificationsNoneOutlinedIcon /> Reminders</p>
             </div>
             }
 

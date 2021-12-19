@@ -145,12 +145,12 @@ function EventDetail(props) {
         <h1>{details.name}</h1>
         </div>
         <div className="col-2">
-        <IconButton onClick={()=>handleSubscribe()}>
-            {subscribe?<NotificationsActiveRoundedIcon fontSize="large" />:<NotificationsNoneIcon fontSize="large" />}
-        </IconButton>
+        {!subscribe?<Button size="large" startIcon={<NotificationsNoneIcon />} variant="contained" onClick={()=>handleSubscribe()}>
+          Subscribe
+        </Button>:<Button size="large" startIcon={<NotificationsActiveRoundedIcon />} color="secondary" onClick={()=>handleSubscribe()}>Unsubscribe</Button>}
         </div>
         </div>
-        <h2>organised by - {details.organiserName}</h2>
+        <h2 className="greycolor">organised by - {details.organiserName}</h2>
 
         <div className="status-div">
         <span className="status-active">{details.type}</span>
@@ -161,7 +161,7 @@ function EventDetail(props) {
         <p><HourglassEmptyIcon /> Start : {moment.parseZone(details.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
         <p><HourglassFullIcon /> End : {moment.parseZone(details.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
         </div>
-        <p>{details.address}</p>
+        <p>{details.eventAddress}</p>
         <p>{details.description}</p>
 
         <div style={{textAlign:"center"}}>

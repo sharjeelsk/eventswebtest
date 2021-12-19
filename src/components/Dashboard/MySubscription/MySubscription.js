@@ -12,6 +12,8 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Alert from '@mui/material/Alert'
 import NotificationsOffRoundedIcon from '@mui/icons-material/NotificationsOffRounded';
 import SimpleBackdrop from '../../utils/SimpleBackdrop'
+import FailureScreen from '../../utils/FailureScreen';
+import NotificationsOffOutlinedIcon from '@mui/icons-material/NotificationsOffOutlined';
 const MySubscription = (props) => {
     const [creation,setCreation]=React.useState([])
     const [error,setError] = React.useState("")
@@ -107,7 +109,7 @@ const MySubscription = (props) => {
 
                     </div>
                   ))
-                ):<p>No nearby events</p>
+                ):<FailureScreen icon={<NotificationsOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} title="You haven't subscribed to any events" />
               }
               </div>
               </div>

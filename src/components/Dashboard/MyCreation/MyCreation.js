@@ -10,6 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Alert from '@mui/material/Alert'
+import NoteAltRoundedIcon from '@mui/icons-material/NoteAltRounded';
+import FailureScreen from '../../utils/FailureScreen';
+import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 const MyCreation = (props) => {
     const [creation,setCreation]=React.useState([])
     const [error,setError] = React.useState("")
@@ -69,11 +72,17 @@ const MyCreation = (props) => {
                       </div>
 
                       <div className="row justify-content-between cardbuttondiv">
-                          <Button  
+                          {item.status.toLowerCase()!=="over"?<Button  
                           onClick={()=>props.history.push("/editevent",item)}
                           className="cardbutton"
                           startIcon={<ModeEditRoundedIcon />}
-                          variant="text">Edit</Button>
+                          variant="text">Edit</Button>:
+                          <Button  
+                          onClick={()=>props.history.push("/feedbackform",item)}
+                          className="cardbutton"
+                          startIcon={<NoteAltRoundedIcon />}
+                          variant="text">Create feedback form</Button>
+                          }
                           <Button
                           className="cardbutton"
                           onClick={()=>props.history.push("/eventdetail",item)}
@@ -90,7 +99,7 @@ const MyCreation = (props) => {
 
                     </div>
                   ))
-                ):<p>No nearby events</p>
+                ):<FailureScreen icon={<EditOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} title="You haven't created any event" />
               }
               </div>
               </div>

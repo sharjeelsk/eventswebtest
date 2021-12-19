@@ -95,16 +95,15 @@ function MyAccount(props) {
 
 
         <div className="row justify-content-between approvaldiv">
-        <div className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div onClick={()=>props.history.push("/mygroups")} className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <GroupsIcon className="cardIcon" />
             <p className="cardheading">My Groups</p>
         </div>
-        <div className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
+        <div onClick={()=>props.history.push("/findvendors")} className="row shadow-sm align-items-center col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 cardiv">
             <PersonSearchIcon className="cardIcon" />
             <p className="cardheading">Find Vendors</p>
         </div>
         </div>
-        <Button onClick={()=>props.history.push("/reminders")}>REminvers</Button>
         <div className="logoutbuttondiv">
         <Button onClick={()=>handleLogout()} className="logoutbutton" variant="contained">Logout <LogoutIcon sx={{marginLeft:1}} /></Button>
         </div>

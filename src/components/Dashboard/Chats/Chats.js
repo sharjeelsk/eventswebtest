@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import "./Chats.scss"
 import {storeSocket} from '../../redux/socket/socketActions'
+import SpeakerNotesOffOutlinedIcon from '@mui/icons-material/SpeakerNotesOffOutlined';
+import FailureScreen from '../../utils/FailureScreen';
 const  socket = io.connect(process.env.REACT_APP_DEVELOPMENT)
 function Chats(props) {
     const [chatList,setChatList]=React.useState([])
@@ -147,9 +149,7 @@ function Chats(props) {
             <ChatDetail name={name} username={username} room={room} messages={messages} setMessages={setMessages} socket={socket} />
             </div>
         </div>:
-        <div className="no-conversations">
-            <h1>You don't have any conversations</h1>
-        </div>
+        <FailureScreen icon={<SpeakerNotesOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} title="You don't have any conversations" />
         }
         </div>
         </div>

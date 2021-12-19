@@ -5,6 +5,7 @@ import Dashhead from '../Dashhead/Dashhead'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 import "./BidsScreen.scss"
 import {connect} from 'react-redux'
 
@@ -58,8 +59,9 @@ function BidsScreen(props) {
                     <h3 className="name col-9">{item.userId.name}</h3>
                     <p className="price col-3">${item.totalPrice}</p>
                     </div>
+                    <Chip label={item.status} />
 
-                    <p className="for">{item.userId.organisation}</p>
+                    <p className="mt-3 for">{item.userId.organisation}</p>
                     <p className="description">{item.description}</p>
 
                     {

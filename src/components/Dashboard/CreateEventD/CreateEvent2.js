@@ -24,6 +24,7 @@ import Box from '@mui/material/Box';
 import {useForm} from 'react-hook-form'
 import Chip from '@mui/material/Chip';
 import ClearIcon from '@mui/icons-material/Clear';
+import Switch from '@mui/material/Switch';
 function CreateEvent2(props) {
     const {register,handleSubmit,formState:{errors}}=useForm()
     let userInfo = props.user.userInfo
@@ -47,6 +48,7 @@ function CreateEvent2(props) {
     const [privatephone,setPrivatePhone]=React.useState("")
     const [privateNumberList,setPrivateNumberList]=React.useState([])
     const [open, setOpen] = React.useState(false);
+    const [limitSubs,setLimitSubs]=React.useState(false)
     
     const [error,setError]=React.useState("")
 
@@ -278,6 +280,19 @@ function CreateEvent2(props) {
                 </div>
             ):null
         }
+        <FormGroup className="inputdiv">
+      <FormControlLabel control={<Switch onChange={()=>setLimitSubs(!limitSubs)} />} label="Limit subscribers / attendee" />
+    </FormGroup>
+    {
+      limitSubs?(
+        <div className="inputdiv">
+          <TextField 
+          fullWidth
+        {...register('maximumattendees',{required:true})}
+        id="filled-basic" label="Enter maximum subscribers" defaultValue={100} variant="filled"  />
+        </div>
+      ):null
+    }
 
         <h1>Contact Info</h1>
 

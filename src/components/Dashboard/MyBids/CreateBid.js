@@ -73,7 +73,7 @@ function CreateBid(props) {
             if(selection.length>0){
                 finalS = selection.map(item=>services[item-1])
             }
-            axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/create-bid`, {eventId:props.location.state._id, description:"description", services:[...finalS,...dataList], totalPrice:getTotal(finalS)}, {headers:{token:props.EventUser.user}})
+            axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/create-bid`, {eventId:props.location.state._id, description, services:[...finalS,...dataList], totalPrice:getTotal(finalS)}, {headers:{token:props.EventUser.user}})
             .then(res=>{
             console.log(res);
             if(res.data.result==="Already Bided"){
@@ -253,7 +253,7 @@ function CreateBid(props) {
             <div style={{position:"fixed",bottom:"5%",right:"5%"}}>
               <Tooltip title="Add Services">
               <Fab 
-              disabled={error || selection.length<=0 || dataList.length<=0?true:false}
+              disabled={error || (selection.length<=0 && dataList.length<=0)?true:false}
               onClick={()=>handleCreateBid()} color="primary" variant="extended">
                 Place Bid
                 <GavelRoundedIcon sx={{ ml: 1 }} />

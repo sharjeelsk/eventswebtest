@@ -13,6 +13,8 @@ import Alert from '@mui/material/Alert'
 import NotificationsOffRoundedIcon from '@mui/icons-material/NotificationsOffRounded';
 import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
 import SimpleBackdrop from '../../utils/SimpleBackdrop'
+import FailureScreen from '../../utils/FailureScreen';
+import CloudOffOutlinedIcon from '@mui/icons-material/CloudOffOutlined';
 const MyBids = (props) => {
     const [mybids,setMyBids]=React.useState([])
     const [error,setError] = React.useState("")
@@ -55,7 +57,7 @@ const MyBids = (props) => {
              </span>
 
              <div onClick={()=>setDisplay(false)}>
-            <h1 className="dashboard-heading">My Bids</h1>
+             <h1 className="dashboard-heading">My Bids</h1>
             <div className="parentofcards row justify-content-between">
               {
                 mybids.length>0?(
@@ -98,7 +100,7 @@ const MyBids = (props) => {
 
                     </div>
                   ))
-                ):<p>No Bids</p>
+                ):<FailureScreen icon={<CloudOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} title="You don't have any bids" />
               }
               </div>
               </div>

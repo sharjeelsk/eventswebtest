@@ -22,6 +22,9 @@ import CreateBid from "./components/Dashboard/MyBids/CreateBid";
 import OrganizerBid from "./components/Dashboard/MyBids/OrganizerBid";
 import MyApprovals from "./components/Dashboard/MyAccount/MyApprovals/MyApprovals";
 import Reminders from "./components/Dashboard/Reminders/Reminders";
+import FeedBackForm from "./components/Dashboard/MyCreation/FeedBackForm";
+import FindVendors from "./components/Dashboard/MyAccount/FindVendors/FindVendors";
+import MyGroups from "./components/Dashboard/MyAccount/MyGroups/MyGroups";
 
 
 function App() {
@@ -49,6 +52,9 @@ function App() {
       <Route path="/organizerbid" component={OrganizerBid} />
       <Route path="/myapprovals" component={MyApprovals} />
       <Route path="/reminders" component={Reminders} />
+      <Route path="/feedbackform" component={FeedBackForm} />
+      <Route path="/findvendors" component={FindVendors} />
+      <Route path="/mygroups" component={MyGroups} />
     </Switch>
   );
 }

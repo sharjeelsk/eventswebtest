@@ -14,6 +14,9 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import {storeUserInfo} from '../redux/user/userActions'
 import OwnMarker from '../utils/Marker/OwnMarker';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
@@ -86,8 +89,18 @@ const Dashboard = (props) => {
           ))}
         </GoogleMapReact>
       </div>
-            <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>    
-            
+            <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>   
+            <div className="searchdiv">
+            <TextField fullWidth 
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <TravelExploreRoundedIcon />
+            //     </InputAdornment>
+            //   ),
+            // }}
+            id="filled-basic" label="Search event by name" variant="filled" />
+            </div> 
             <div className="parentofcards row justify-content-between">
               {
                 data.length>0?(
