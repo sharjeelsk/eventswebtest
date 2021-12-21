@@ -22,5 +22,19 @@
         padding:2%;  
         border-radius: 10px; 
     }
+    .display-responses{
+        background-color: white;
+        margin: 3% 5%;
+        padding:2%;
+        height: 80vh;
+        overflow-y: scroll;
+        border-radius: 10px; 
+        .index{
+            font-weight: bold;
+        }
+        .resp{
+            font-weight: 300;
+        }
+    }
 
 }

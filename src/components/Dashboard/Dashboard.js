@@ -17,12 +17,14 @@ import OwnMarker from '../utils/Marker/OwnMarker';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
+import SimpleBackdrop from '../utils/SimpleBackdrop';
 
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
     const [data,setData]=React.useState([])
     const [flag,setFlag]=React.useState(false)
+    const [loading,setLoading]=React.useState(false)
     const [error,setError]=React.useState("")
     console.log("dashboard props",props)
     const getGeo = async ()=>{
@@ -31,6 +33,7 @@ const Dashboard = (props) => {
       },(err)=>setError(err.message));
     }
     React.useEffect(()=>{
+      setLoading(true)
       getGeo()
          axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/event/all-event`,{headers:{token:props.userToken}})
           .then(res=>{
@@ -42,21 +45,25 @@ const Dashboard = (props) => {
               if(res.data.msg==="Success"){
                 props.storeUserInfo(res.data.result)
               }
+              setLoading(false)
             })
             .catch(err=>{
               console.log(err);
+              setLoading(false)
+
             })
           })
           .catch(err=>{
             console.log(err);
-          })
+          setLoading(false)
 
+          })
           
     },[flag])
     console.log(data);
     return (
         <div className="row">
-          
+          <SimpleBackdrop open={loading} />
             <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
             <Dashhead id={1} display={display} />
             </div>

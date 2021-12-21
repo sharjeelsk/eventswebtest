@@ -18,7 +18,6 @@ function ChatDetailT(props) {
             console.log("propsmessages is",props.messages);
             props.updateSocket(msg)
 
-            setMessage("")
           });
     },[props.socket])
     const handleSubmit = async ()=>{

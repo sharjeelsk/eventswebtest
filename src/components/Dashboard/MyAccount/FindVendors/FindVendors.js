@@ -13,7 +13,7 @@ function FindVendors(props) {
     const [data,setData]=React.useState([])
     const [filtered,setFiltered]=React.useState([])
     React.useEffect(()=>{
-        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/search`,{query:"Aurangabad"},{headers:{token:props.user.user}})
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/search`,{query:"aurangabad"},{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res)
             if(res.data.result.length>0){

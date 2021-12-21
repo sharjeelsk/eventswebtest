@@ -20,11 +20,27 @@ import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
 import Tooltip from '@mui/material/Tooltip'
 import DeleteSweepRoundedIcon from '@mui/icons-material/DeleteSweepRounded';
 import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
-function FeedBackForm() {
+import axios from 'axios'
+import {connect} from 'react-redux'
+function FeedBackForm(props) {
+    console.log(props);
     const [display,setDisplay]=React.useState(false)
     const [age, setAge] = React.useState('');
     const [labelText,setLabelText]=React.useState("")
     const [formInputs,setFormInputs]=React.useState([])
+    const [responses,setResponses]=React.useState([])
+
+    React.useEffect(()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/eventForm/event-feedbacks`, {eventId: props.location.state._id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res)
+            //console.log(Object.values(res..formData[0]));
+            setResponses(res.data.result)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    },[])
 
     const handleChange = (event) => {
       setAge(event.target.value);
@@ -38,6 +54,16 @@ function FeedBackForm() {
     const filterForm = (item)=>{
         let arr = formInputs.filter(items=>items!==item)
         setFormInputs(arr)
+    }
+
+    const handleFormSubmit = ()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/eventForm/create-eventForm`,{eventId: props.location.state._id, formData:formInputs},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
     const renderInput =(item)=>{
@@ -108,6 +134,13 @@ function FeedBackForm() {
         <div className="col-7 feedbackform mx-auto shadow-sm">
             <h2>Form review</h2>
             {
+                props.location.state.form.length>0?props.location.state.form[0].formData.map((item,index)=>(
+                    <div key={index}>
+                        {
+                            renderInput(item)
+                        }
+                    </div>
+                )):
                 formInputs.map((item,index)=>(
                     <div key={index}>
                         {
@@ -126,7 +159,25 @@ function FeedBackForm() {
 
 
       </div>
-      <div style={{position:"fixed",bottom:"5%",right:"5%"}}>
+
+    <div className="shadow-sm display-responses">
+        <h2 className="mb-4">Form Responses</h2>
+        {
+            responses.length>0?(
+                responses.map((item,index)=>(
+                    <div className="row">
+                        <p className="index mx-3">{index+1}</p>
+                        {
+                            Object.values(item.formData[0]).map(resp=><p className="resp mr-5">{resp.toString()}</p>)
+                        }
+                    </div>
+                ))
+            ):null
+        }
+
+    </div>
+
+      <div onClick={()=>handleFormSubmit()} style={{position:"fixed",bottom:"5%",right:"5%"}}>
               <Tooltip title="Add Services">
               <Fab 
               disabled={formInputs.length<=0?true:false}
@@ -143,4 +194,10 @@ function FeedBackForm() {
     )
 }
 
-export default FeedBackForm
+const mapStateToProps = ({EventUser})=>{
+return {
+    user:EventUser
+}
+}
+
+export default connect(mapStateToProps)(FeedBackForm)

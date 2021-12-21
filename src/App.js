@@ -25,6 +25,7 @@ import Reminders from "./components/Dashboard/Reminders/Reminders";
 import FeedBackForm from "./components/Dashboard/MyCreation/FeedBackForm";
 import FindVendors from "./components/Dashboard/MyAccount/FindVendors/FindVendors";
 import MyGroups from "./components/Dashboard/MyAccount/MyGroups/MyGroups";
+import FillFeedbackForm from "./components/Dashboard/MySubscription/FillFeedbackForm";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
       <Route path="/feedbackform" component={FeedBackForm} />
       <Route path="/findvendors" component={FindVendors} />
       <Route path="/mygroups" component={MyGroups} />
+      <Route path="/fillfeedbackform" component={FillFeedbackForm} />
     </Switch>
   );
 }

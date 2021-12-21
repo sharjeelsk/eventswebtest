@@ -19,6 +19,7 @@ const MyCreation = (props) => {
     React.useEffect(()=>{   
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/event/user-event`, {headers:{token:props.user.user}})
         .then(res=>{
+          console.log(res);
             let MyCreatiion =res.data.result.filter(item=>item.organiserId===props.user.userInfo._id)
             console.log(MyCreatiion)
             

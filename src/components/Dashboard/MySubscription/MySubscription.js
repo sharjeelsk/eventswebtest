@@ -100,11 +100,17 @@ const MySubscription = (props) => {
                           >
                               Details
                           </Button>
-                          <Button  
+                          {item.status.toLowerCase()!=="over"?<Button  
                           onClick={()=>handleUnsubscribe(item._id)}
                           className="cardbutton"
                           endIcon={<NotificationsOffRoundedIcon />}
-                          variant="contained">Unsubscribe</Button>
+                          variant="contained">Unsubscribe</Button>:
+                          <Button  
+                          onClick={()=>props.history.push("/fillfeedbackform",item.form)}
+                          className="cardbutton"
+                          endIcon={<NotificationsOffRoundedIcon />}
+                          variant="contained">send feedback</Button>
+                          }
                         </div>
 
                     </div>
