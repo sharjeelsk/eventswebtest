@@ -49,7 +49,7 @@ function ChatDetailT(props) {
             props.messages.length>0?(
                 props.messages.map((item,index)=>(
                     <div key={index} className={item.sender===props.EventUser.userInfo._id?"mychat":"senderchat"}>
-                    <span>{item.text}</span>
+                    <p className="textcontainer">{item.text}</p>
                     
                     </div>
                 ))

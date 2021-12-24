@@ -78,6 +78,7 @@ function MyAccount(props) {
         <p className="mobile"><LocalPhoneTwoToneIcon /> {userInfo.mobileNo}</p>      
         <p className="email"><EmailTwoToneIcon /> {userInfo.email}</p>
         <p className="organisation"><BusinessTwoToneIcon /> {userInfo.organisation}</p>
+        <p className="city"><HomeTwoToneIcon /> {userInfo.city}</p>
         <p className="address"><HomeTwoToneIcon /> {userInfo.address}</p>
         </div>
         </div>

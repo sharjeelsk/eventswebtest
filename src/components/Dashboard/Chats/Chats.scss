@@ -280,8 +280,11 @@
     overflow-y: scroll;
     .mychat{
         margin:2% 0;
-        text-align: right;
-        span{
+        text-align: right !important;
+        .textcontainer{
+        display: table;
+        margin: 0 0 0 auto;
+        align-self: right;
         background-color: $purple;
         color: white;
         padding:1% 2%;
@@ -292,7 +295,9 @@
     .senderchat{
         margin:2% 0;
         text-align: left;
-        span{
+        .textcontainer{
+        display: table;
+        margin: 0 auto 0 0;
         background-color: #f7f7f7;
         color: black;
         padding:1% 2%;

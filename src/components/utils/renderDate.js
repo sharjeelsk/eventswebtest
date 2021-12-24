@@ -15,3 +15,18 @@ export const renderDate = (mydate)=>{
         return notificationDate
     }
 }
+
+export const renderTimeDate =(mydate)=>{
+    const now = new Date();
+    let today = date.format(now, 'HH:mm:ss');  
+    let Yesterday = date.addDays(now, -1);
+    Yesterday = date.format(Yesterday,'HH:mm:ss');
+    let notificationDate = moment.parseZone(mydate).local().format("DD/MM/YY")
+    if(notificationDate===today){
+        return today
+    }else if (notificationDate===Yesterday){
+        return `Yesterday ${Yesterday}`
+    }else{
+        return notificationDate
+    }
+}

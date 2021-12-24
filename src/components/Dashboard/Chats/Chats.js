@@ -12,6 +12,7 @@ import "./Chats.scss"
 import {storeSocket} from '../../redux/socket/socketActions'
 import SpeakerNotesOffOutlinedIcon from '@mui/icons-material/SpeakerNotesOffOutlined';
 import FailureScreen from '../../utils/FailureScreen';
+import {renderTimeDate} from '../../utils/renderDate'
 const  socket = io.connect(process.env.REACT_APP_DEVELOPMENT)
 function Chats(props) {
     const [chatList,setChatList]=React.useState([])
@@ -136,7 +137,7 @@ function Chats(props) {
                     <p className="message">{Object.keys(item).includes("lastMsg")?(item.lastMsg.text.length>30?item.lastMsg.text.slice(0,30)+"...":item.lastMsg.text):"start a new conversation"}</p>
                     </div>
                     <div>                    
-                    <p className="time">8:45 pm</p>
+                    <p className="time">{renderTimeDate(item.updatedAt)}</p>
                     </div>
                     </div>
                      

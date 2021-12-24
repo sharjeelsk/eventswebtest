@@ -25,6 +25,7 @@ import {useForm} from 'react-hook-form'
 import Chip from '@mui/material/Chip';
 import ClearIcon from '@mui/icons-material/Clear';
 import Switch from '@mui/material/Switch';
+
 function CreateEvent2(props) {
     const {register,handleSubmit,formState:{errors}}=useForm()
     let userInfo = props.user.userInfo
@@ -49,6 +50,7 @@ function CreateEvent2(props) {
     const [privateNumberList,setPrivateNumberList]=React.useState([])
     const [open, setOpen] = React.useState(false);
     const [limitSubs,setLimitSubs]=React.useState(false)
+    const [allowContact,setAllowContact]=React.useState(true)
     
     const [error,setError]=React.useState("")
 
@@ -71,6 +73,7 @@ function CreateEvent2(props) {
         //let correctedEnd=date.parse(end,'DD/MM/YYYY h:mm A')
       console.log(data);
       setOpen(true)
+      console.log(data);
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/create-event`,
         {mobileNo:phone, 
         email:email, 
@@ -83,7 +86,9 @@ function CreateEvent2(props) {
         start:start, 
         end:end, 
         reqServices:tagList,
-        eventAddress:data.eventAddress
+        eventAddress:data.eventAddress,
+        maxMembers: data.maximumattendees?data.maximumattendees:false,
+        allowContact,
         },{headers:{token:props.user.user}})
         .then(result=>{
             setError("")
@@ -122,7 +127,7 @@ function CreateEvent2(props) {
         
         //console.log(code,number);
     }
-    console.log(privateNumberList);
+    console.log(allowContact);
 
     return (
         <div className="row">
@@ -289,7 +294,7 @@ function CreateEvent2(props) {
           <TextField 
           fullWidth
         {...register('maximumattendees',{required:true})}
-        id="filled-basic" label="Enter maximum subscribers" defaultValue={100} variant="filled"  />
+        id="filled-basic" label="Enter maximum subscribers"  variant="filled"  />
         </div>
       ):null
     }
@@ -303,6 +308,12 @@ function CreateEvent2(props) {
         <TextField value={address} onChange={(e)=>setAddress(e.target.value)} fullWidth className="input" id="standard-basic" label="Address" variant="standard"  />
         </div>
 
+        <FormControlLabel 
+        value={allowContact}
+        control={<Checkbox value={allowContact} defaultChecked onChange={()=>setAllowContact(!allowContact)} />}
+        label="Allow vendors and users to contact you"
+        />
+        
         <h1 className="service-tagh1">Service Tags</h1>
         <FormGroup 
         className="check-group"

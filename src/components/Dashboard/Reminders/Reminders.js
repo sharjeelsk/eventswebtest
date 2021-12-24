@@ -9,10 +9,15 @@ import axios from 'axios'
 import {renderDate} from '../../utils/renderDate'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import TwoBDialog from '../../utils/TwoBDialog'
 function Reminders(props) {
     const [display,setDisplay]=React.useState(false)
     const [data,setData]=React.useState([])
+    const [open,setOpen]=React.useState(false)
+    const [id,setId]=React.useState('')
     const [pageNumber, setPageNumber] = React.useState(0)
+    
     const usersPerPage = 5;
     const pagesVisited = pageNumber*usersPerPage //consider pages visited as users visited
     const displayUsers = data.slice(pagesVisited,pagesVisited+usersPerPage)
@@ -22,7 +27,14 @@ function Reminders(props) {
                             <h4>{item.msg.title}</h4>
                             <p>{renderDate(item.createdAt)}</p>
                         </div>
+                        <div className="mx-auto row align-items-center justify-content-between">
                         <p>{item.msg.body}</p>
+                        <IconButton onClick={()=>{
+                            setOpen(true) 
+                            setId(item._id)}} aria-label="delete">
+                        <DeleteOutlineRoundedIcon color="primary" />
+                        </IconButton>
+                        </div>
                     </div>
                             ))
     const pageCount = Math.ceil(data.length/usersPerPage)
@@ -30,9 +42,8 @@ function Reminders(props) {
 
         setPageNumber(pageno)
     }
-    React.useEffect(()=>{
-    console.log("user",props.user.user)
-    axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/reminder/user-reminder`,{headers:{token:props.user.user}})
+    const getReminders = ()=>{
+        axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/reminder/user-reminder`,{headers:{token:props.user.user}})
     .then(res=>{
         console.log(res)
         setData(res.data.result)
@@ -40,8 +51,24 @@ function Reminders(props) {
     .catch(err=>{
         console.log(err)
     })
+    }
+    React.useEffect(()=>{
+    console.log("user",props.user.user)
+    getReminders()
 
     },[])
+    const handleSubmit = ()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/reminder/delete-reminder`,{reminderId:id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res);
+            getReminders()
+            setOpen(false)
+        })
+        .catch(err=>{
+            setOpen(false)
+            console.log(err);
+        })
+    }
     console.log(data)
     return (
         <div className="row">
@@ -57,6 +84,13 @@ function Reminders(props) {
          </span>
 
         <div className="container reminder-container" style={{height:"80vh"}} onClick={()=>setDisplay(false)}>
+        <TwoBDialog title="Delete Service" description="Are you sure you want to delete this service"
+        rightButton="Delete"
+        leftButton="Cancel"
+        open={open}
+        setOpen={setOpen}
+        handleSubmit={handleSubmit}
+        />
         <h1 className="mt-3">Reminders <NotificationsNoneOutlinedIcon sx={{fontSize:"1em"}} /></h1>
         {
             displayUsers

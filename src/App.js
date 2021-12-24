@@ -26,6 +26,7 @@ import FeedBackForm from "./components/Dashboard/MyCreation/FeedBackForm";
 import FindVendors from "./components/Dashboard/MyAccount/FindVendors/FindVendors";
 import MyGroups from "./components/Dashboard/MyAccount/MyGroups/MyGroups";
 import FillFeedbackForm from "./components/Dashboard/MySubscription/FillFeedbackForm";
+import CrudGroup from './components/Dashboard/MyAccount/MyGroups/CrudGroup'
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
       <Route path="/findvendors" component={FindVendors} />
       <Route path="/mygroups" component={MyGroups} />
       <Route path="/fillfeedbackform" component={FillFeedbackForm} />
+      <Route path="/crudgroup" component={CrudGroup} />
     </Switch>
   );
 }

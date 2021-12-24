@@ -67,13 +67,15 @@ function EventDetail(props) {
           setError("Something went wrong")
         })
       }else{
-        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/join-event`, {eventId:details._id }, {headers:{token:props.user.user}})
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/join-event`, {eventId:details._id, maxMembers:details.maxMembers , joined: details.totalSubs }, {headers:{token:props.user.user}})
         .then(res=>{
             setLoading(false)
             if(res.data.result==="Joined"){
                 //navigation.navigate("successlottie",{route:"My Events"})
                 setSubscribed(true)
               props.location.state.subs.unshift(props.user.userInfo._id)
+            }else{
+              setError("Can't subscribe as event is full")
             }
             console.log(res);
         })
@@ -144,11 +146,11 @@ function EventDetail(props) {
         <div className="col-10">
         <h1>{details.name}</h1>
         </div>
-        <div className="col-2">
+        {details.organiserId!==props.user.userInfo._id?<div className="col-2">
         {!subscribe?<Button size="large" startIcon={<NotificationsNoneIcon />} variant="contained" onClick={()=>handleSubscribe()}>
           Subscribe
         </Button>:<Button size="large" startIcon={<NotificationsActiveRoundedIcon />} color="secondary" onClick={()=>handleSubscribe()}>Unsubscribe</Button>}
-        </div>
+        </div>:null}
         </div>
         <h2 className="greycolor">organised by - {details.organiserName}</h2>
 
@@ -164,10 +166,10 @@ function EventDetail(props) {
         <p>{details.eventAddress}</p>
         <p>{details.description}</p>
 
-        <div style={{textAlign:"center"}}>
+        {details.organiserId!==props.user.userInfo._id?<div style={{textAlign:"center"}}>
         <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
-        </div>
+        </div>:null}
         </div>
             {/* end of block */}
         </div>

@@ -13,27 +13,51 @@ import Alert from '@mui/material/Alert'
 import NoteAltRoundedIcon from '@mui/icons-material/NoteAltRounded';
 import FailureScreen from '../../utils/FailureScreen';
 import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TwoBDialog from '../../utils/TwoBDialog'
+import SimpleBackdrop from '../../utils/SimpleBackdrop'
 const MyCreation = (props) => {
     const [creation,setCreation]=React.useState([])
     const [error,setError] = React.useState("")
-    React.useEffect(()=>{   
+    const [loading,setLoading]=React.useState(false)
+    const [flag,setFlag]=React.useState(false)
+    React.useEffect(()=>{  
+      setLoading(true) 
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/event/user-event`, {headers:{token:props.user.user}})
         .then(res=>{
           console.log(res);
             let MyCreatiion =res.data.result.filter(item=>item.organiserId===props.user.userInfo._id)
             console.log(MyCreatiion)
-            
+            setLoading(false)
             setCreation(MyCreatiion)
         })
         .catch(err=>{
-            
+            setLoading(false)
            setError("something went wrong")
         })
-    },[])
+    },[flag])
     
     const [display,setDisplay]=React.useState(false)
+    const [open,setOpen]=React.useState(false)
+    const [deleteId,setDeleteId]=React.useState("")
+    const handleSubmit = ()=>{
+      console.log(deleteId);
+      setLoading(true)
+      axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/delete-event`,{eventId:deleteId},{headers:{token:props.user.user}})
+      .then(res=>{
+        console.log(res);
+        setFlag(!flag)
+        setOpen(false)
+        setLoading(false)
+      })
+      .catch(err=>{
+        setLoading(false)
+        console.log(err)
+      })
+    }
     return (
         <div className="row">
+          <SimpleBackdrop open={loading} />
             <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
             <Dashhead id={2} display={display} />
             </div>
@@ -46,6 +70,13 @@ const MyCreation = (props) => {
              </span>
 
              <div onClick={()=>setDisplay(false)}>
+             <TwoBDialog title="Delete Event" description="Are you sure you want to delete this event"
+        rightButton="Delete"
+        leftButton="Cancel"
+        open={open}
+        setOpen={setOpen}
+        handleSubmit={handleSubmit}
+        />
             <h1 className="dashboard-heading">My Creations</h1>
             <div className="parentofcards row justify-content-between">
               {
@@ -53,13 +84,23 @@ const MyCreation = (props) => {
                   creation.map((item,index)=>(
                     <div key={index}  className="cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
                       <div className="row justify-content-between">
-                      <h2 className="col-10">{item.name}</h2>
-                      <p className="col-2 subs">{item.totalSubs} Joined</p>
+                      <h2 className="col-11">{item.name}</h2>
+                      <div className="col-1">
+                      <IconButton onClick={()=>{
+                        setDeleteId(item._id)
+                        setOpen(true)}} color='primary' aria-label="delete">
+                      <DeleteIcon />
+                      </IconButton>
+                      </div>
                       </div>
 
-                      <div className="chipdiv">
+                      <div className="row">
+                      <div className="col-9 chipdiv">
                       <span className="private">{item.type}</span>
                       <span className="status-red">{item.status}</span>
+                      </div>
+                      <p className="col-3 subs">{item.totalSubs} Joined</p>
+
                       </div>
 
                       <div className="row">

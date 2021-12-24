@@ -10,6 +10,8 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import Tooltip from '@mui/material/Tooltip';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import FailureScreen from '../../../utils/FailureScreen'
+import ExtensionOffOutlinedIcon from '@mui/icons-material/ExtensionOffOutlined';
 
 function MyServices(props) {
     const [display,setDisplay]=React.useState(false)
@@ -78,7 +80,7 @@ function MyServices(props) {
                     </div>
                 </div>
                 ))
-            ):null
+            ):<FailureScreen title="You haven't added any services" icon={<ExtensionOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} />
         }        
         </div>
 

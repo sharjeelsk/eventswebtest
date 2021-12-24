@@ -7,13 +7,18 @@ import "./FindVendors.scss"
 import {connect} from 'react-redux'
 import Rating from '@mui/material/Rating'
 import TextField from '@mui/material/TextField'
+import FailureScreen from '../../../utils/FailureScreen'
+import PersonOffOutlinedIcon from '@mui/icons-material/PersonOffOutlined';
 
 function FindVendors(props) {
     const [display,setDisplay]=React.useState(false);
     const [data,setData]=React.useState([])
     const [filtered,setFiltered]=React.useState([])
+    const [loading,setLoading]=React.useState(false)
+    const [cityName,setCityName]=React.useState("")
     React.useEffect(()=>{
-        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/search`,{query:"aurangabad"},{headers:{token:props.user.user}})
+        setCityName(props.user.userInfo.city)
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/search`,{query:props.user.userInfo.city},{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res)
             if(res.data.result.length>0){
@@ -25,16 +30,24 @@ function FindVendors(props) {
         })
 
     },[])
-    const setSearchResult=(e)=>{
-        let array = data.filter(item=>{
-          //console.log(item)
-          let name = item.name.slice(0,e.length).trim().replace(' ','').toLowerCase();
-          let serachname = e.toLowerCase().replace(' ','').trim();
-          if(name===serachname){
-            return item;
-          }
+    const setSearchResult=(city)=>{
+        console.log(city)
+        setCityName(city)
+        setTimeout(() => {
+        setLoading(true)
+            axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/search`,{query:city},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res)
+                setData(res.data.result)
+                setTimeout(() => {
+                    setLoading(false)                    
+                }, 500);
         })
-        setFiltered(array)
+        .catch(err=>{
+            console.log(err);
+            setLoading(false)
+        })
+        }, 2000);
       }
     console.log(data,props);
     return (
@@ -51,7 +64,7 @@ function FindVendors(props) {
          </span>
 
         <div onClick={()=>setDisplay(false)}>
-   <h1 className="mt-4">Showing vendors in Aurangabad</h1>
+   <h1 className="mt-4">Showing vendors in {cityName.length>0?cityName:props.user.userInfo.city}</h1>
             <TextField sx={{width:'30vw'}} 
             onChange={(e)=>setSearchResult(e.target.value)}
             className="my-3"
@@ -97,7 +110,7 @@ function FindVendors(props) {
                         </div>
                     </div>
                 ))
-            ):null
+            ):<FailureScreen title="No nearby vendors" icon={<PersonOffOutlinedIcon sx={{fontSize:"4em"}} color="primary" />} />
         }
         {
             filtered.length>0?(

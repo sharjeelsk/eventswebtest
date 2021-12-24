@@ -19,7 +19,8 @@ const AddInfo = (props) => {
             {"propName" : "name", "value": data.name},
             {"propName" : "email", "value": data.email},
             {"propName" : "organisation", "value": data.organisation},
-            {"propName" : "address", "value": data.address}
+            {"propName" : "address", "value": data.address},
+            {"propName" : "city", "value": data.city}
           
           ],{headers:{'token':props.location.state}})
           .then(res=>{
@@ -112,6 +113,25 @@ const AddInfo = (props) => {
                 label="Enter Address" 
                 variant="outlined" {...register('address',{required:true})} 
                 helperText="Address is required"
+                error
+                 />
+                 }
+            </div>
+
+            <div className="start addinfoinputdiv ">
+                {!errors.city?<TextField 
+                sx={{width:"100%"}}
+                id="outlined-basic" 
+                label="Enter City" 
+                variant="outlined" {...register('city',{required:true})} 
+                
+                 />:
+                 <TextField 
+                sx={{width:"100%"}}
+                id="outlined-basic" 
+                label="Enter City" 
+                variant="outlined" {...register('city',{required:true})} 
+                helperText="city is required"
                 error
                  />
                  }

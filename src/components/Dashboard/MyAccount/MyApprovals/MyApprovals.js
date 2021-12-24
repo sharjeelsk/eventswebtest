@@ -6,7 +6,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
 import "./MyApprovals.scss"
-
+import FailureScreen from '../../../utils/FailureScreen'
+import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
 function MyApprovals(props) {
     const [display,setDisplay]=React.useState(false)
     const [data,setData]=React.useState([])
@@ -74,7 +75,7 @@ function MyApprovals(props) {
                         </div>
                     </div>
                 ))
-            ):null
+            ):<FailureScreen title="You haven't approved any bids" icon={<GavelRoundedIcon sx={{fontSize:"4em"}} color="primary" />} />
         }
         </div>
         
