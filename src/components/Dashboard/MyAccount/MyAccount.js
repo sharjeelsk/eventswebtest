@@ -27,12 +27,16 @@ import Button from '@mui/material/Button'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LogoutIcon from '@mui/icons-material/Logout';
 import storageSession from 'redux-persist/lib/storage/session'
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import EditFormDialogue from '../../utils/EditFormDialogue'
 
 function MyAccount(props) {
     const [display,setDisplay]=React.useState(false)
+    const [open,setOpen]=React.useState(false)
     //const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
     let userInfo =props.userInfo;
-    React.useEffect(() => {
+
+    const getUser = ()=>{
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/user/single-user`,{headers:{token:props.userToken}})
             .then(res=>{
                 console.log(res)
@@ -45,6 +49,10 @@ function MyAccount(props) {
                 .catch(err=>{
                     console.log(err)
                 })
+    }
+
+    React.useEffect(() => {
+        getUser()
     },[])
     const handleLogout = ()=>{
         window.sessionStorage.clear()
@@ -66,7 +74,7 @@ function MyAccount(props) {
          </span>
 
         <div className="  " onClick={()=>setDisplay(false)}>
-
+        <EditFormDialogue getUser={getUser} open={open} setOpen={setOpen} />
         
         <div className="shadow-sm row align-items-center profilediv">
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 imagediv">
@@ -110,7 +118,13 @@ function MyAccount(props) {
         </div>
 
 
-        
+        <div style={{position:"fixed",bottom:"5%",right:"5%"}}>
+              <Tooltip title="Add Services">
+              <Fab onClick={()=>setOpen(true)} color="primary" aria-label="add">
+                <EditRoundedIcon />
+              </Fab>
+              </Tooltip>
+        </div>
             {/* end of block */}
         </div>
         </div>

@@ -51,6 +51,8 @@ function CreateEvent2(props) {
     const [open, setOpen] = React.useState(false);
     const [limitSubs,setLimitSubs]=React.useState(false)
     const [allowContact,setAllowContact]=React.useState(true)
+    const [groups,setGroups]=React.useState([])
+    const [selectedGroups,setSelectedGroups]=React.useState([])
     
     const [error,setError]=React.useState("")
 
@@ -60,7 +62,14 @@ function CreateEvent2(props) {
             console.log(res)
             if(res.data.msg==='Success'){
                 setTag(res.data.result)
-
+                axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/single-userContact`,{headers:{token:props.user.user}})
+                .then(res=>{
+                  setGroups(res.data.result.groups)
+                  console.log(res);
+                })
+                .catch(err=>{
+                  console.log(err);
+                })
             }
         })
         .catch(err=>{
@@ -71,9 +80,23 @@ function CreateEvent2(props) {
     const onSubmit = (data,e)=>{
        // let correctedStart=date.parse(start,'DD/MM/YYYY h:mm A')
         //let correctedEnd=date.parse(end,'DD/MM/YYYY h:mm A')
-      console.log(data);
-      setOpen(true)
-      console.log(data);
+        let GroupList = []
+        if(selectedGroups.length>0){
+          selectedGroups.map(item=>{
+            GroupList = GroupList.concat(item.list)
+          })
+        }
+        if(privateNumberList.length>0){
+          privateNumberList.map(item=>{
+            GroupList = GroupList.concat(Object.entries(item))
+          })
+        }
+        if(GroupList.length>0){
+          GroupList = GroupList.map(item=>Object.fromEntries([item]))
+        }
+      
+      //setOpen(true)
+      console.log(GroupList);
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/create-event`,
         {mobileNo:phone, 
         email:email, 
@@ -81,7 +104,7 @@ function CreateEvent2(props) {
         name:data.eventName, 
         description:data.description, 
         type:type.toUpperCase(),
-        contacts:privateNumberList,
+        contacts:GroupList,
         location:props.location.state, 
         start:start, 
         end:end, 
@@ -127,7 +150,7 @@ function CreateEvent2(props) {
         
         //console.log(code,number);
     }
-    console.log(allowContact);
+    console.log("private list",selectedGroups,privateNumberList);
 
     return (
         <div className="row">
@@ -264,7 +287,7 @@ function CreateEvent2(props) {
       e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
   }}
     />
-    <Button className="addbutton" onClick={()=>onSubmit2()} variant="contained" type="submit">Add Number</Button>
+    <Button className="addbutton" onClick={()=>onSubmit2()} variant="contained" >Add Number</Button>
     {
         privateNumberList.length>0?(
             privateNumberList.map((item,index)=>(
@@ -281,6 +304,35 @@ function CreateEvent2(props) {
                     
             ))
         ):null
+    }
+
+    <h1>Invite groups</h1>
+    {
+      groups.length>0?(
+        groups.map((item,index)=>(
+          <FormControlLabel 
+                    key={index}
+                    control={<Checkbox 
+                    value={item.groupName}
+                    onChange={()=>{
+                        if(selectedGroups.length>0){
+                          selectedGroups.map((group,indexg)=>{
+                            if(group.groupName===item.groupName){
+                              selectedGroups.splice(indexg,1)
+                              setSelectedGroups([...selectedGroups])
+                            }else{
+                              setSelectedGroups([...selectedGroups,item])
+                            }
+                          })
+                        }else{
+                          setSelectedGroups([...selectedGroups,item])
+                        }
+                        
+                    }}
+                    />} 
+                    label={item.groupName} />
+        ))
+      ):null
     }
                 </div>
             ):null

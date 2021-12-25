@@ -44,7 +44,9 @@ function MyGroups(props) {
             return <div className="row mx-auto" >
             {
             list.map((num,index)=>(
-            <p key={index}>{num[1]}</p>
+                <div className="mx-1" key={index}>
+                <p>{num[1]}</p>
+                </div>
             ))
             }
             </div>
@@ -71,7 +73,7 @@ function MyGroups(props) {
         {
             data.length>0?(
                 data.map((item,index)=>(
-                    <div onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list})} className="mx-auto shadow-sm col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 group-container" key={index}>
+                    <div onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list})} className="mx-3 shadow-sm  group-container" key={index}>
                         <h2 className="group-heading">{item.groupName}</h2>
                         {renderList(item.list)}
                     </div>

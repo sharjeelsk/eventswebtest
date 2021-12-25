@@ -8,11 +8,15 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import "./BidsScreen.scss"
 import {connect} from 'react-redux'
-
+import axios from 'axios'
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import TwoBDialog from '../../utils/TwoBDialog'
 function BidsScreen(props) {
     const [display,setDisplay]=React.useState(false);
     const [value, setValue] = React.useState('allbids');
     const [myBid,setMyBid]=React.useState([])
+    const [open,setOpen]=React.useState(false)
+    const [id,setId]=React.useState('')
     const bids = props.location.state
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -23,6 +27,16 @@ function BidsScreen(props) {
         setMyBid(Bid)
         
     },[])
+    const handleSubmit = ()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/delete-bid`,{bidId:id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res);
+            props.history.push("/mybids")
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
     return (
         <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -37,6 +51,13 @@ function BidsScreen(props) {
          </span>
 
         <div className="container" onClick={()=>setDisplay(false)}>
+        <TwoBDialog title="Delete Bid" description="Are you sure you want to delete this bid"
+        rightButton="Delete"
+        leftButton="Cancel"
+        open={open}
+        setOpen={setOpen}
+        handleSubmit={handleSubmit}
+        />
         <Box sx={{ width: '100%' }}>
       <Tabs
         value={value}
@@ -55,9 +76,16 @@ function BidsScreen(props) {
                 myBid.map((item,index)=>(
                     <div className="shadow-sm col-6 bid-parent-container" key={index}>
                     <div className="">
-                    <div className="row justify-content-between">
-                    <h3 className="name col-9">{item.userId.name}</h3>
-                    <p className="price col-3">${item.totalPrice}</p>
+                    <div className="row align-items-center justify-content-between">
+                    <h3 className="name col-8">{item.userId.name}</h3>
+                    <p className="price col-3 m-auto">${item.totalPrice}</p>
+                    <div className="col-1">
+                    <IconButton onClick={()=>{
+                            setOpen(true) 
+                            setId(item._id)}} aria-label="delete">
+                        <DeleteOutlineRoundedIcon color="primary" />
+                        </IconButton>
+                    </div>
                     </div>
                     <Chip label={item.status} />
 

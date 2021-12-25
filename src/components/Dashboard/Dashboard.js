@@ -26,6 +26,7 @@ const Dashboard = (props) => {
     const [flag,setFlag]=React.useState(false)
     const [loading,setLoading]=React.useState(false)
     const [error,setError]=React.useState("")
+    
     console.log("dashboard props",props)
     const getGeo = async ()=>{
       window.navigator.geolocation.getCurrentPosition((loca)=>{
@@ -60,7 +61,33 @@ const Dashboard = (props) => {
           })
           
     },[flag])
+    const getEvent  = ()=>{
+      axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/event/all-event`,{headers:{token:props.userToken}})
+          .then(res=>{
+            if(res.data.msg==="Success" && res.data.result.length>0){
+              setData(res.data.result)
+            }})
+            .catch(err=>{
+              console.log(err);
+            })
+    }
     console.log(data);
+    const setSearchResult=(e)=>{
+      if(e.length<=0){
+        getEvent()
+      }else{
+        let array = data.filter(item=>{
+          //console.log(item)
+          let name = item.name.slice(0,e.length).trim().replace(' ','').toLowerCase();
+          let serachname = e.toLowerCase().replace(' ','').trim();
+          if(name===serachname){
+            return item;
+          }
+        })
+        setData(array)
+      }
+      
+    }
     return (
         <div className="row">
           <SimpleBackdrop open={loading} />
@@ -106,6 +133,7 @@ const Dashboard = (props) => {
             //     </InputAdornment>
             //   ),
             // }}
+            onChange={(e)=>setSearchResult(e.target.value)}
             id="filled-basic" label="Search event by name" variant="filled" />
             </div> 
             <div className="parentofcards row justify-content-between">

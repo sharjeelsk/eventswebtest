@@ -47,7 +47,7 @@ function CrudGroup(props) {
     }
 
     const handleAdd = ()=>{
-        if(name.length<=0 || groupName.length<=0 || Object.keys(mobileNumberList).length<=0){
+        if(name.length<=0 || groupName.length<=0 || mobileNumber.length<=0){
             setError("Check your inputs")
         }else{
             setError("")

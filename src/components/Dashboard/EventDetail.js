@@ -146,7 +146,7 @@ function EventDetail(props) {
         <div className="col-10">
         <h1>{details.name}</h1>
         </div>
-        {details.organiserId!==props.user.userInfo._id?<div className="col-2">
+        {details.organiserId!==props.user.userInfo._id &&details.status.toLowerCase()!=="over"?<div className="col-2">
         {!subscribe?<Button size="large" startIcon={<NotificationsNoneIcon />} variant="contained" onClick={()=>handleSubscribe()}>
           Subscribe
         </Button>:<Button size="large" startIcon={<NotificationsActiveRoundedIcon />} color="secondary" onClick={()=>handleSubscribe()}>Unsubscribe</Button>}
@@ -166,7 +166,7 @@ function EventDetail(props) {
         <p>{details.eventAddress}</p>
         <p>{details.description}</p>
 
-        {details.organiserId!==props.user.userInfo._id?<div style={{textAlign:"center"}}>
+        {details.organiserId!==props.user.userInfo._id &&details.status.toLowerCase()!=="over"?<div style={{textAlign:"center"}}>
         <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
         </div>:null}
