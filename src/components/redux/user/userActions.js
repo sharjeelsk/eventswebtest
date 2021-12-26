@@ -10,3 +10,8 @@ export const storeUserInfo = (info)=>{
         payload:info
     }
 }
+export const deleteUser =()=>{
+    return {
+        type:"DELETE_USER"
+    }
+}

@@ -14,7 +14,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-
+import Badge from '@mui/material/Badge';
+import {connect} from 'react-redux'
 const Dashhead = (props) => {
     console.log(props);
     let {id,display} = props
@@ -56,18 +57,53 @@ const Dashhead = (props) => {
             }
 
             {id===5?<div className="menu-container-active">
-                <p><ChatIcon /> Chats</p>
+                <p>
+                <Badge 
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            badgeContent={props.user.userInfo!==null?props.user.userInfo.conversationCount:0} color="primary">    
+                <ChatIcon /> 
+                </Badge> Chats</p>
             </div>:
             <div className="menu-container" onClick={()=>props.history.push('chats')}>
-            <p><ChatOutlinedIcon /> Chats</p>
+            <p>
+            <Badge 
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            badgeContent={props.user.userInfo!==null?props.user.userInfo.conversationCount:0} color="primary">        
+            <ChatOutlinedIcon /> 
+            </Badge> Chats</p>
             </div>
             }
 
             {id===7?<div className="menu-container-active">
-                <p><NotificationsRoundedIcon /> Reminders</p>
+                <p>
+                <Badge 
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            badgeContent={props.user.userInfo!==null?props.user.userInfo.reminderCount:0} color="primary">    
+                <NotificationsRoundedIcon /> 
+                </Badge>
+                Reminders</p>
             </div>:
             <div className="menu-container" onClick={()=>props.history.push('/reminders')}>
-            <p><NotificationsNoneOutlinedIcon /> Reminders</p>
+            <p>
+            <Badge 
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            badgeContent={props.user.userInfo!==null?props.user.userInfo.reminderCount:0} color="primary">
+                <NotificationsNoneOutlinedIcon /> 
+            </Badge>
+            Reminders
+                </p>
             </div>
             }
 
@@ -85,4 +121,10 @@ const Dashhead = (props) => {
     );
 }
 
-export default withRouter(Dashhead);
+const mapStateToProps = ({EventUser})=>{
+    return {
+        user:EventUser
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Dashhead));

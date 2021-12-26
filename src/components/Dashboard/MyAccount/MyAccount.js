@@ -12,7 +12,7 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import axios from 'axios'
-import {storeUserInfo} from '../../redux/user/userActions'
+import {storeUserInfo,setUser,deleteUser} from '../../redux/user/userActions'
 import {connect} from 'react-redux'
 import PersonOutlineTwoToneIcon from '@mui/icons-material/PersonOutlineTwoTone';
 import LocalPhoneTwoToneIcon from '@mui/icons-material/LocalPhoneTwoTone';
@@ -55,7 +55,8 @@ function MyAccount(props) {
         getUser()
     },[])
     const handleLogout = ()=>{
-        window.sessionStorage.clear()
+        props.deleteUser()
+        //window.sessionStorage.clear()
         //storageSession.removeItem('socket')
         props.history.push("/")
 
@@ -133,7 +134,8 @@ function MyAccount(props) {
 }
 const mapDispatchToProps =(dispatch)=>{
     return {
-      storeUserInfo:(info)=>dispatch(storeUserInfo(info))
+      storeUserInfo:(info)=>dispatch(storeUserInfo(info)),
+      deleteUser:()=>dispatch(deleteUser())
     }
   }
   
