@@ -18,6 +18,7 @@ function MyServices(props) {
     const [services,setServices]=React.useState([])
     const [id,setId]=React.useState("")
     const [open,setOpen]=React.useState(false)
+    const [flag,setFlag]=React.useState(false)
     React.useEffect(()=>{
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/service/user-service`,{headers:{token:props.EventUser.user}})
         .then(res=>{
@@ -30,9 +31,20 @@ function MyServices(props) {
         .catch(err=>{
             console.log(err);
         })
-    },[])
+    },[flag])
     const handleSubmit = ()=>{
-        setOpen(false)
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/delete-service`,{serviceId:id},{headers:{token:props.EventUser.user}})
+        .then(res=>{
+          if(res.data.msg==="Success"){
+            setOpen(false)
+            setFlag(!flag)
+          }
+         
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+
     }
     console.log(services,open,id);
     return (
@@ -57,7 +69,7 @@ function MyServices(props) {
         setOpen={setOpen}
         handleSubmit={handleSubmit}
         />
-        <h1 className="heading">My Services</h1>
+        <h1 >My Services</h1>
 
         <div className="row justify-content-between cardparentcontainer">
         {
