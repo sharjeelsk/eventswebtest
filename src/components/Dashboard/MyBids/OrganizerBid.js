@@ -13,6 +13,7 @@ import Rating from '@mui/material/Rating';
 import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
 import Alert from '@mui/material/Alert'
 import Ratenowdialogue from '../../utils/Ratenowdialogue';
+import TwoBDialog from '../../utils/TwoBDialog'
 function OrganizerBid(props) {
     const [display,setDisplay]=React.useState(false);
     const [value, setValue] = React.useState('mybid');
@@ -23,6 +24,8 @@ function OrganizerBid(props) {
     const [rating,setRating]=React.useState(0)
     const [error,setError]=React.useState("")
     const [open,setOpen]=React.useState(false)
+    const [open2,setOpen2]=React.useState(false)
+    const [id,setId]=React.useState("")
     console.log(rating)
     //const bids = props.location.state
     const handleChange = (event, newValue) => {
@@ -68,6 +71,20 @@ function OrganizerBid(props) {
         })
     }
 
+    const handleSubmit = ()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/cancel-org`,{bidId: id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res);
+            if(res.data.msg==="Success"){
+            setOpen2(false)
+            props.history.push("mycreation")
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
     return (
         <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -75,6 +92,7 @@ function OrganizerBid(props) {
         </div>
 
         <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 dashboard-container">
+     
             <span className="iconbutton">
         <IconButton  size="large" aria-label="Menu" onClick={()=>setDisplay(true)}>
         <MenuIcon fontSize="inherit" />
@@ -82,6 +100,13 @@ function OrganizerBid(props) {
          </span>
 
         <div className="container" onClick={()=>setDisplay(false)}>
+        <TwoBDialog title="Request Cancellation" description="Are you sure you want to request vendor for cancellation of this bid"
+        rightButton="Send"
+        leftButton="Cancel"
+        open={open2}
+        setOpen={setOpen2}
+        handleSubmit={handleSubmit}
+        />
         <Box sx={{ width: '100%' }}>
       <Tabs
         value={value}
@@ -139,6 +164,14 @@ function OrganizerBid(props) {
                             </div>
                         ))
                     }
+                    {!item.cancel.organiser.value?<div style={{textAlign:"center"}} className="mt-3">
+                    <Button onClick={()=>{
+                        setId(item._id)
+                        setOpen2(true)
+                    }} variant="text" color="error">Request Bid cancellation?</Button>
+                    </div>:<Alert className="mt-3" severity="error">Bid cancellation requested</Alert>}
+
+
                     </div>
                 </div>
                 ))

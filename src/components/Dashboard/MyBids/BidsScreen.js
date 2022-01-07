@@ -8,15 +8,18 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import "./BidsScreen.scss"
 import {connect} from 'react-redux'
+import Button from '@mui/material/Button'
 import axios from 'axios'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import TwoBDialog from '../../utils/TwoBDialog'
+import Alert from '@mui/material/Alert'
 function BidsScreen(props) {
     const [display,setDisplay]=React.useState(false);
     const [value, setValue] = React.useState('allbids');
     const [myBid,setMyBid]=React.useState([])
     const [open,setOpen]=React.useState(false)
     const [id,setId]=React.useState('')
+    const [open2,setOpen2]=React.useState(false)
     const bids = props.location.state
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -37,6 +40,18 @@ function BidsScreen(props) {
             console.log(err)
         })
     }
+
+    const handleSubmit2=()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/cancel-ven`,{bidId:id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res);
+            setOpen2(false)
+            props.history.push("/mybids")
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
     return (
         <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -51,12 +66,19 @@ function BidsScreen(props) {
          </span>
 
         <div className="container" onClick={()=>setDisplay(false)}>
-        <TwoBDialog title="Delete Bid" description="Are you sure you want to delete this bid"
+        <TwoBDialog title="Delete Event" description="Are you sure you want to delete this event"
         rightButton="Delete"
         leftButton="Cancel"
         open={open}
         setOpen={setOpen}
         handleSubmit={handleSubmit}
+        />
+        <TwoBDialog title="Accept Cancellation" description="Are you sure you want to approve bid cancellation"
+        rightButton="Accept"
+        leftButton="Cancel"
+        open={open2}
+        setOpen={setOpen2}
+        handleSubmit={handleSubmit2}
         />
         {/* <Box sx={{ width: '100%' }}>
       <Tabs
@@ -111,6 +133,12 @@ function BidsScreen(props) {
                             </div>
                         ))
                     }
+                     {item.cancel.organiser.value && !item.cancel.vendor.value?<div style={{textAlign:"center"}} className="mt-3">
+                    <Button onClick={()=>{
+                        setId(item._id)
+                        setOpen2(true)
+                    }} variant="text" color="error">Accept Bid cancellation?</Button>
+                    </div>:item.cancel.vendor.value?<Alert className="mt-3" severity="error">Bid cancelled</Alert>:null}
                     </div>
                 </div>
                 ))
