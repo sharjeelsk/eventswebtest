@@ -128,7 +128,7 @@ function BidsScreen(props) {
 
                                 <div className="col-3">
                                 <p className="service-price">${service.price}</p>
-                                <p className="service-quantity">{service.quantity}</p>
+                                <p className="service-quantity">{service.quantity} {service.unit}</p>
                                 </div>
                             </div>
                         ))

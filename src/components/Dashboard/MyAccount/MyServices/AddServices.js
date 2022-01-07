@@ -14,6 +14,10 @@ import SimpleSnackbar from '../../../utils/Snackbar'
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import Tooltip from '@mui/material/Tooltip'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 function AddServices(props) {
     const {register,handleSubmit,formState:{errors}}=useForm()
     const [display,setDisplay]=React.useState(false)
@@ -23,6 +27,12 @@ function AddServices(props) {
     const [dataList,setDataList]=React.useState([])
     const [loading,setLoading]=React.useState(false)
     const [open, setOpen] = React.useState(false);
+    const [unit, setUnit] = React.useState('');
+    const SiUnits = ['ml','l','kg','lbs','g','cm','m','inch']
+    const handleChange = (event) => {
+      setUnit(event.target.value);
+    };
+  
     React.useEffect(()=>{
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/category/all-category`, {headers:{token:props.EventUser.user}})
         .then(res=>{
@@ -40,15 +50,15 @@ function AddServices(props) {
         setLoading(true)
         let categoryId=""
         console.log(data);
-        if(mainCategoryR===""){
-            setError("Please enter category")
+        if(mainCategoryR==="" || unit===''){
+            setError("Please fill all details")
         }else{
             setError("")
             let arr = mainCategory.filter(item=>item.name===mainCategoryR)
             if(arr.length>0){
                 categoryId=arr[0]._id
             }
-                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory, quantity:data.quantity, price:data.price},{headers:{token:props.EventUser.user}})
+                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory, quantity:data.quantity, price:data.price,unit},{headers:{token:props.EventUser.user}})
                 .then(res=>{
                     console.log(res);
                     if(res.data.msg==="Success"){
@@ -100,8 +110,11 @@ function AddServices(props) {
       {...register('subcategory',{required:true})}
       className="textfield" fullWidth label="Sub Category" variant="outlined" />
 
-      <div className="row justify-content-center">
+      <div className="row justify-content-center align-items-center">
+     
+     <div className="col-4">
       <TextField 
+      fullWidth
       error={errors.quantity?true:false}
       helperText={errors.quantity?"quantity is must":null}
       onInput = {(e) =>{
@@ -109,16 +122,38 @@ function AddServices(props) {
     }}
       {...register('quantity',{required:true})}
       className="textfield" label="Quantity" variant="outlined" />
+      </div>
+
+
+      <div className="col-4">
+    <FormControl fullWidth> 
+        <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={unit}
+          label="Select Unit"
+          onChange={handleChange}
+        >
+          
+          {
+              SiUnits.map((item,index)=><MenuItem key={index} value={item}>{item}</MenuItem>)
+          }
+        </Select>
+      </FormControl>
+      </div>
+      
+    
+      </div>
       <TextField 
       onInput = {(e) =>{
         e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
     }}
+    fullWidth
       error={errors.price?true:false}
       helperText={errors.price?"price is must":null}
       {...register('price',{required:true})}
       className="textfield" label="Price" variant="outlined" />
-      </div>
-    
     <div style={{textAlign:"center"}}>
     <Button 
     loading={loading?true:false}
@@ -143,7 +178,7 @@ function AddServices(props) {
                         <tr>
                         <td data-label="Name">{item.category}</td>
                         <td data-label="Age">{item.subCategory}</td>
-                        <td data-label="Job">{item.quantity}</td>
+                        <td data-label="Job">{item.quantity} {item.unit}</td>
                         <td data-label="Job">{item.price}</td>
                       </tr>
                     ))}

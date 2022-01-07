@@ -16,7 +16,12 @@ import Tooltip from '@mui/material/Tooltip'
 import Chip from '@mui/material/Chip';
 import { DataGrid } from '@mui/x-data-grid';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 function CreateBid(props) {
+    const SiUnits = ['ml','l','kg','lbs','g','cm','m','inch']
     const {register,handleSubmit,formState:{errors}}=useForm()
     const [display,setDisplay]=React.useState(false)
     const [mainCategory,setMainCategory] =React.useState([])
@@ -28,6 +33,10 @@ function CreateBid(props) {
     const [services,setServices]=React.useState([])
     const [selection,setSelection]=React.useState([])
     const [description,setDescription]=React.useState("")
+    const [unit, setUnit] = React.useState('');
+    const handleChange = (event) => {
+        setUnit(event.target.value);
+      };
     React.useEffect(()=>{
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/category/all-category`, {headers:{token:props.EventUser.user}})
         .then(res=>{
@@ -101,7 +110,7 @@ function CreateBid(props) {
         }
         else{
             setError("")
-            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price}
+            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price,unit}
             let present = dataList.filter(item=>item.subCategory===obj.subCategory)
             if(present.length>0){
                 setError("Already Added")
@@ -196,24 +205,62 @@ function CreateBid(props) {
                     {...register('subcategory',{required:true})}
                     className="textfield" fullWidth label="Sub Category" variant="outlined" />
 
-                    <div className="row justify-content-center">
-                    <TextField 
-                    error={errors.quantity?true:false}
-                    helperText={errors.quantity?"quantity is must":null}
-                    onInput = {(e) =>{
-                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
-                    }}
-                    {...register('quantity',{required:true})}
-                    className="textfield" label="Quantity" variant="outlined" />
-                    <TextField 
-                    onInput = {(e) =>{
-                        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
-                    }}
-                    error={errors.price?true:false}
-                    helperText={errors.price?"price is must":null}
-                    {...register('price',{required:true})}
-                    className="textfield" label="Price" variant="outlined" />
-                    </div>
+
+
+
+
+
+                    <div className="row justify-content-center align-items-center">
+     
+                        <div className="col-4">
+                        <TextField 
+                        fullWidth
+                        error={errors.quantity?true:false}
+                        helperText={errors.quantity?"quantity is must":null}
+                        onInput = {(e) =>{
+                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+                        }}
+                        {...register('quantity',{required:true})}
+                        className="textfield" label="Quantity" variant="outlined" />
+                        </div>
+
+
+                        <div className="col-4">
+                        <FormControl fullWidth> 
+                            <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={unit}
+                            label="Select Unit"
+                            onChange={handleChange}
+                            >
+                            
+                            {
+                                SiUnits.map((item,index)=><MenuItem key={index} value={item}>{item}</MenuItem>)
+                            }
+                            </Select>
+                        </FormControl>
+                        </div>
+                        
+                        
+                        </div>
+                        <TextField 
+                        onInput = {(e) =>{
+                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+                        }}
+                        fullWidth
+                        error={errors.price?true:false}
+                        helperText={errors.price?"price is must":null}
+                        {...register('price',{required:true})}
+                        className="textfield" label="Price" variant="outlined" />
+
+
+
+
+
+
+
                     
                     <div style={{textAlign:"center"}}>
                     <Button 
@@ -237,7 +284,7 @@ function CreateBid(props) {
                                         <tr>
                                         <td data-label="Name">{item.category}</td>
                                         <td data-label="Age">{item.subCategory}</td>
-                                        <td data-label="Job">{item.quantity}</td>
+                                        <td data-label="Job">{item.quantity} {item.unit}</td>
                                         <td data-label="Job">{item.price}</td>
                                     </tr>
                                     ))}
@@ -253,7 +300,6 @@ function CreateBid(props) {
             <div style={{position:"fixed",bottom:"5%",right:"5%"}}>
               <Tooltip title="Add Services">
               <Fab 
-              disabled={error || (selection.length<=0 && dataList.length<=0)?true:false}
               onClick={()=>handleCreateBid()} color="primary" variant="extended">
                 Place Bid
                 <GavelRoundedIcon sx={{ ml: 1 }} />
@@ -286,6 +332,12 @@ const columns = [
       type: 'number',
       width: 90,
     },
+    {
+        field: 'unit',
+        headerName: 'Unit',
+        type: 'number',
+        width: 90,
+      },
     {
         field: 'price',
         headerName: 'Price',

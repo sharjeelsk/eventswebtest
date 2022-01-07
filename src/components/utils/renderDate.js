@@ -30,3 +30,9 @@ export const renderTimeDate =(mydate)=>{
         return notificationDate
     }
 }
+
+
+export const renderNormalDate = (mydate)=>{
+    let formatedDate = moment.parseZone(mydate).local().format("HH:mm:ss DD/MM/YY")
+    return formatedDate;
+}

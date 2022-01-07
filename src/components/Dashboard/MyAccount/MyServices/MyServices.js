@@ -12,6 +12,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import FailureScreen from '../../../utils/FailureScreen'
 import ExtensionOffOutlinedIcon from '@mui/icons-material/ExtensionOffOutlined';
+import {renderNormalDate} from '../../../utils/renderDate'
 
 function MyServices(props) {
     const [display,setDisplay]=React.useState(false)
@@ -87,8 +88,8 @@ function MyServices(props) {
                         <p className="price"> $ {item.price}</p>
                     </div>
                     <div className="row align-items-center justify-content-between">
-                        <p className="time">{item.updatedAt}</p>
-                        <p className="quantity">{item.quantity}</p>
+                        <p className="time">{renderNormalDate(item.updatedAt)}</p>
+                        <p className="quantity">{item.quantity} {item.unit}</p>
                     </div>
                 </div>
                 ))
