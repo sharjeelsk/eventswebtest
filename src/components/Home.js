@@ -48,7 +48,7 @@ const Home = () => {
 
             {/* second section 2.1  */}
             <section className="s2">
-                <h1 className="heading">Your roles</h1>
+                <h1 className="headingwithpad">Your roles</h1>
                 <div className="row s2-parent-card justify-content-between">
 
                     <div className="s2-card shadow col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -81,7 +81,7 @@ const Home = () => {
 
             {/* start of the second section  */}
             <div className="secondsection">
-            <h1 className="heading">Steps Involved</h1>
+            <h1 className="headingwithpad">Steps Involved</h1>
             <div className="row my-5">
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <CreateEv className="svg" />
@@ -118,7 +118,7 @@ const Home = () => {
             {/* start of third section */}
 
             <div className="thirdsection">
-            <h1 className="headingt">Why choose events?</h1>
+            <h1 className="headingwithpad">Why choose events?</h1>
             <p>
                 Eiusmod exercitation do ullamco in duis esse ullamco sint culpa aliquip. Esse dolor consequat aliqua et Lorem consequat esse nulla proident tempor. Cupidatat sit et culpa dolor reprehenderit occaecat. Et excepteur deserunt magna labore deserunt.
 
@@ -130,7 +130,7 @@ Ut ullamco qui veniam exercitation cillum minim adipisicing laboris proident par
 
             {/* fourth section ------------ */}
             <div className="fourthsection">
-            <h1 className="heading">Our happy users</h1>
+            <h1 className="headingwithpad">Our happy users</h1>
                 <div className="row justify-content-between">
                     <div className="shadow col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                         <h2>Fida Patel</h2>

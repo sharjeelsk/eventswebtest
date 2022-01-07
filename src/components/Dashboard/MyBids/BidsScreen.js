@@ -58,7 +58,7 @@ function BidsScreen(props) {
         setOpen={setOpen}
         handleSubmit={handleSubmit}
         />
-        <Box sx={{ width: '100%' }}>
+        {/* <Box sx={{ width: '100%' }}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -69,10 +69,10 @@ function BidsScreen(props) {
         <Tab value="mybid" label="My Bid" />
         <Tab value="allbids" label="All Bids" />
       </Tabs>
-    </Box>
+    </Box> */}
     <div className="row mt-3 bid-parent">
     {
-            myBid.length>0 && value==="mybid"?(
+            myBid.length>0 ?(
                 myBid.map((item,index)=>(
                     <div className="shadow-sm col-6 bid-parent-container" key={index}>
                     <div className="">
@@ -118,7 +118,7 @@ function BidsScreen(props) {
         }
         </div>
         {/* all ibds starts */}
-        <div className="row bid-parent">
+        {/* <div className="row bid-parent">
         {
             bids.length>0 && value==="allbids"?(
                 bids.map((item,index)=>(
@@ -156,7 +156,7 @@ function BidsScreen(props) {
                 ))
             ):null
         }
-        </div>
+        </div> */}
 
             {/* end of block */}
         </div>
