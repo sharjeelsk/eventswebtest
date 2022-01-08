@@ -18,7 +18,10 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import SimpleBackdrop from '../utils/SimpleBackdrop';
-
+import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
@@ -26,6 +29,14 @@ const Dashboard = (props) => {
     const [flag,setFlag]=React.useState(false)
     const [loading,setLoading]=React.useState(false)
     const [error,setError]=React.useState("")
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [filter,setFilter] = React.useState("New Events Nearby")
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
     
     console.log("dashboard props",props)
     const getGeo = async ()=>{
@@ -123,7 +134,8 @@ const Dashboard = (props) => {
           ))}
         </GoogleMapReact>
       </div>
-            <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>   
+      
+            {/* <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>    */}
             <div className="searchdiv">
             <TextField fullWidth 
             // InputProps={{
@@ -136,6 +148,43 @@ const Dashboard = (props) => {
             onChange={(e)=>setSearchResult(e.target.value)}
             id="filled-basic" label="Search event by name" variant="filled" />
             </div> 
+
+            <div>
+      <Button
+        sx={{marginLeft:5,fontSize:"1.2em"}}
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        endIcon={<KeyboardArrowDownIcon />}
+      >
+       {filter}
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={()=>setAnchorEl(null)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem disabled={filter==="New Events Nearby"?true:false} onClick={()=>{
+        setFilter("New Events Nearby")
+        setAnchorEl(null);
+        }}>New Events Nearby</MenuItem>
+        <MenuItem disabled={filter==="Oldest Events"?true:false} onClick={()=>{
+          setFilter("Oldest Events")
+          setAnchorEl(null);
+        }}>Sort by oldest</MenuItem>
+        <MenuItem disabled={filter==="Events by name"?true:false} onClick={()=>{
+          setFilter("Events by name")
+          setAnchorEl(null);
+        }}>Sort by name</MenuItem>
+      </Menu>
+    </div>
+
             <div className="parentofcards row justify-content-between">
               {
                 data.length>0?(

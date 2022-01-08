@@ -20,14 +20,15 @@ const AddInfo = (props) => {
             {"propName" : "email", "value": data.email},
             {"propName" : "organisation", "value": data.organisation},
             {"propName" : "address", "value": data.address},
-            {"propName" : "city", "value": data.city}
+            {"propName" : "city", "value": data.city},
+            {"propName" : "curr", "value": props.location.state.curr}
           
-          ],{headers:{'token':props.location.state}})
+          ],{headers:{'token':props.location.state.token}})
           .then(res=>{
             console.log(res);
             setOpen(false)
             if(res.data.msg==='Success'){
-                props.setUser(props.location.state)
+                props.setUser(props.location.state.token)
               props.history.push('dashboard')
             }
           })

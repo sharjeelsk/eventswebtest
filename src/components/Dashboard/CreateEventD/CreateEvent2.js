@@ -25,7 +25,8 @@ import {useForm} from 'react-hook-form'
 import Chip from '@mui/material/Chip';
 import ClearIcon from '@mui/icons-material/Clear';
 import Switch from '@mui/material/Switch';
-
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 function CreateEvent2(props) {
     const {register,handleSubmit,formState:{errors}}=useForm()
     let userInfo = props.user.userInfo
@@ -53,7 +54,7 @@ function CreateEvent2(props) {
     const [allowContact,setAllowContact]=React.useState(true)
     const [groups,setGroups]=React.useState([])
     const [selectedGroups,setSelectedGroups]=React.useState([])
-    
+    const [tagTotal,setTagTotal]=React.useState(0)
     const [error,setError]=React.useState("")
 
     React.useEffect(()=>{
@@ -150,7 +151,13 @@ function CreateEvent2(props) {
         
         //console.log(code,number);
     }
-    console.log("private list",selectedGroups,privateNumberList);
+    console.log("private list",tagTotal,tagList);
+
+    const renderTagTotal=()=>{
+      if(tagList.length>0){
+        
+      }
+    }
 
     return (
         <div className="row">
@@ -159,14 +166,14 @@ function CreateEvent2(props) {
         <Dashhead id={1} display={display} />
         </div>
 
-        <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 dashboard-container">
+        <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 dashboard-container grey">
             <span className="iconbutton">
         <IconButton  size="large" aria-label="Menu" onClick={()=>setDisplay(true)}>
         <MenuIcon fontSize="inherit" />
          </IconButton>
          </span>
 
-        <div className="createEventDiv2" onClick={()=>setDisplay(false)}>
+        <div className="createEventDiv2 shadow-sm" onClick={()=>setDisplay(false)}>
         <h1 className="heading1">Create Event</h1>
 
         <form  onSubmit = {handleSubmit(onSubmit)}>
@@ -367,6 +374,7 @@ function CreateEvent2(props) {
         />
         
         <h1 className="service-tagh1">Service Tags</h1>
+        <p style={{color:"#ccc"}}><i>service tags will help vendor put appropriate bid</i></p>
         <FormGroup 
         className="check-group"
         row>
@@ -378,11 +386,18 @@ function CreateEvent2(props) {
                     key={index}
                     control={<Checkbox 
                     value={tagList.includes(item.name)?true:false}
+                    icon={<LocalOfferOutlinedIcon />}
+                    checkedIcon={<LocalOfferRoundedIcon color="primary" />}
                     onChange={()=>{
                         if(tagList.includes(item.name)){
                             let filteredarray = tagList.filter(e=>e!==item.name)
+                            let num = parseInt(item.approximation);
+                            setTagTotal(tagTotal-num)
                             setTagList(filteredarray)
                         }else{
+                          let num = parseInt(item.approximation);
+                          console.log(num);
+                          setTagTotal(tagTotal+num)
                             setTagList([...tagList,item.name])
                         }
                     }}
@@ -393,7 +408,12 @@ function CreateEvent2(props) {
 
         }
             </FormGroup>
-
+         {tagTotal!==0?
+         <div style={{margin:"2% 20%"}}>
+         <p style={{fontWeight:"bold",fontSize:"1.2em"}}>Approximate cost : ${tagTotal}</p>
+         <p style={{color:"#ccc"}}><i>Note : approximate cost is on an average cost you'll require for your event if you have selected specific tags, this is not an actual cost, cost may vary from place to place</i></p>
+         </div>
+         :null}
 
             <Button 
             className="submitbutton"

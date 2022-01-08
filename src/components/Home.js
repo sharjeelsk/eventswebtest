@@ -153,7 +153,7 @@ Ut ullamco qui veniam exercitation cillum minim adipisicing laboris proident par
             </div>
             {/* fourth section ------------ */}
             </div>
-            <Footer />
+            <Footer footer="fullfooter" />
 
         </div>
     );

@@ -28,7 +28,7 @@ function AddServices(props) {
     const [loading,setLoading]=React.useState(false)
     const [open, setOpen] = React.useState(false);
     const [unit, setUnit] = React.useState('');
-    const SiUnits = ['ml','l','kg','lbs','g','cm','m','inch']
+    const SiUnits = ['ml','L','kg','lbs','g','cm','m','inch',"pcs", 'boxes']
     const handleChange = (event) => {
       setUnit(event.target.value);
     };
@@ -126,7 +126,7 @@ function AddServices(props) {
 
 
       <div className="col-4">
-    <FormControl fullWidth> 
+      <FormControl fullWidth> 
         <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
         <Select
           labelId="demo-simple-select-label"

@@ -21,7 +21,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 function CreateBid(props) {
-    const SiUnits = ['ml','l','kg','lbs','g','cm','m','inch']
+    const SiUnits = ['ml','L','kg','lbs','g','cm','m','inch',"pcs", 'boxes']
     const {register,handleSubmit,formState:{errors}}=useForm()
     const [display,setDisplay]=React.useState(false)
     const [mainCategory,setMainCategory] =React.useState([])
@@ -285,7 +285,7 @@ function CreateBid(props) {
                                         <td data-label="Name">{item.category}</td>
                                         <td data-label="Age">{item.subCategory}</td>
                                         <td data-label="Job">{item.quantity} {item.unit}</td>
-                                        <td data-label="Job">{item.price}</td>
+                                        <td data-label="Job">{item.price} {props.user.userInfo.curr}</td>
                                     </tr>
                                     ))}
                                     </tbody>

@@ -76,7 +76,7 @@ function MyServices(props) {
         {
             services.length>0?(
                 services.map((item,index)=>(
-                <div key={index} className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 carddiv">
+                <div key={index} className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 carddiv shadow-sm">
                     <div className="row align-items-center justify-content-between">
                         <h2 className="maincategory">{item.category}</h2>
                         <IconButton onClick={()=>{
@@ -85,7 +85,7 @@ function MyServices(props) {
                     </div>
                     <div className="row align-items-center justify-content-between">
                         <p className="category">{item.subCategory}</p>
-                        <p className="price"> $ {item.price}</p>
+                        <p className="price"> {item.price} {props.EventUser.userInfo.curr}</p>
                     </div>
                     <div className="row align-items-center justify-content-between">
                         <p className="time">{renderNormalDate(item.updatedAt)}</p>

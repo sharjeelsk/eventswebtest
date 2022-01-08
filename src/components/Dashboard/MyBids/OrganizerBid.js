@@ -127,7 +127,7 @@ function OrganizerBid(props) {
                     <div className="">
                     <div className="row justify-content-between">
                     <h3 className="name col-9">{item.userId.name}</h3>
-                    <p className="price col-3">${item.totalPrice}</p>
+                    <p className="price col-3">{item.totalPrice} {props.user.userInfo.curr}</p>
                     </div>
 
                     <div className="row mx-auto  align-items-center justify-content-between">
@@ -158,7 +158,7 @@ function OrganizerBid(props) {
                                 </div>
 
                                 <div className="col-3">
-                                <p className="service-price">${service.price}</p>
+                                <p className="service-price">{service.price} {props.user.userInfo.curr}</p>
                                 <p className="service-quantity">{service.quantity} {service.unit}</p>
                                 </div>
                             </div>

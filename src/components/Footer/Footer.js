@@ -10,9 +10,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkIcon from '@mui/icons-material/Link';
 import ContactlessIcon from '@mui/icons-material/Contactless';
-function Footer() {
+function Footer(props) {
     return (
-        <div className="row mx-auto footer">
+        <div className={`row mx-auto ${props.footer}`} >
 
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 footercol">
             <h2 style={{fontSize:"3.5em"}}>Events</h2>

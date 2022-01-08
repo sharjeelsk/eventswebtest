@@ -29,7 +29,7 @@ const Otp = (props) => {
                 else if(res.data.msg!=="login"){
                     console.log(res.data.result); //token
                     //props.setUser(res.data.result)
-                    props.history.push("addInfo",res.data.result)
+                    props.history.push("addInfo",{token:res.data.result,curr:props.location.state.curr})
                 }else if(res.data.msg==="login"){
                     props.setUser(res.data.result)
                     //props.storeSocket(socket)

@@ -29,6 +29,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import storageSession from 'redux-persist/lib/storage/session'
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import EditFormDialogue from '../../utils/EditFormDialogue'
+import Footer from '../../Footer/Footer'
 
 function MyAccount(props) {
     const [display,setDisplay]=React.useState(false)
@@ -120,7 +121,7 @@ function MyAccount(props) {
 
 
         <div style={{position:"fixed",bottom:"5%",right:"5%"}}>
-              <Tooltip title="Add Services">
+              <Tooltip title="Edit Profile">
               <Fab onClick={()=>setOpen(true)} color="primary" aria-label="add">
                 <EditRoundedIcon />
               </Fab>

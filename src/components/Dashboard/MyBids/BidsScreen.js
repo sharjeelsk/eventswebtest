@@ -100,7 +100,7 @@ function BidsScreen(props) {
                     <div className="">
                     <div className="row align-items-center justify-content-between">
                     <h3 className="name col-8">{item.userId.name}</h3>
-                    <p className="price col-3 m-auto">${item.totalPrice}</p>
+                    <p className="price col-3 m-auto">{item.totalPrice} {props.user.userInfo.curr}</p>
                     <div className="col-1">
                     <IconButton onClick={()=>{
                             setOpen(true) 
@@ -127,7 +127,7 @@ function BidsScreen(props) {
                                 </div>
 
                                 <div className="col-3">
-                                <p className="service-price">${service.price}</p>
+                                <p className="service-price">{service.price} {props.user.userInfo.curr}</p>
                                 <p className="service-quantity">{service.quantity} {service.unit}</p>
                                 </div>
                             </div>
