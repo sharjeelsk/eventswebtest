@@ -153,11 +153,7 @@ function CreateEvent2(props) {
     }
     console.log("private list",tagTotal,tagList);
 
-    const renderTagTotal=()=>{
-      if(tagList.length>0){
-        
-      }
-    }
+
 
     return (
         <div className="row">

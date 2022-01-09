@@ -170,17 +170,39 @@ const Dashboard = (props) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem disabled={filter==="New Events Nearby"?true:false} onClick={()=>{
+        <MenuItem disabled={filter==="New Events Nearby"?true:false} onClick={()=>{ //oldest, newest, name
         setFilter("New Events Nearby")
-        setAnchorEl(null);
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/filter`, {option: "newest"}, {headers:{token:props.userToken}})
+        .then(res=>{
+          setData(res.data.result)
+          setAnchorEl(null);
+        })
+        .catch(err=>{
+          console.log(err)
+        })
         }}>New Events Nearby</MenuItem>
         <MenuItem disabled={filter==="Oldest Events"?true:false} onClick={()=>{
           setFilter("Oldest Events")
+          axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/filter`, {option: "oldest"}, {headers:{token:props.userToken}})
+        .then(res=>{
+          console.log(res)
+          setData(res.data.result)
           setAnchorEl(null);
+        })
+        .catch(err=>{
+          console.log(err)
+        })
         }}>Sort by oldest</MenuItem>
         <MenuItem disabled={filter==="Events by name"?true:false} onClick={()=>{
           setFilter("Events by name")
-          setAnchorEl(null);
+          axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/filter`, {option: "ZtoA"}, {headers:{token:props.userToken}})
+          .then(res=>{
+            setData(res.data.result)
+            setAnchorEl(null);
+          })
+          .catch(err=>{
+            console.log(err)
+          })
         }}>Sort by name</MenuItem>
       </Menu>
     </div>
