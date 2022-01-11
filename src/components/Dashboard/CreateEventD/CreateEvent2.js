@@ -65,8 +65,10 @@ function CreateEvent2(props) {
                 setTag(res.data.result)
                 axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/single-userContact`,{headers:{token:props.user.user}})
                 .then(res=>{
+                  if(res.data.result!=="No Contacts"){
                   setGroups(res.data.result.groups)
-                  console.log(res);
+                  }
+                  console.log("group response",res);
                 })
                 .catch(err=>{
                   console.log(err);
@@ -335,7 +337,7 @@ function CreateEvent2(props) {
                     />} 
                     label={item.groupName} />
         ))
-      ):null
+      ):<p>You haven't added any groups</p>
     }
                 </div>
             ):null
