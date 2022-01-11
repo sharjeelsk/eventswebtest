@@ -193,7 +193,7 @@ function OrganizerBid(props) {
 
                     <div className="row justify-content-between mx-auto mt-3">
                     <p className="for ">{item.userId.organisation}</p>
-                    <p className="price ">${item.totalPrice}</p>
+                    <p className="price ">{item.totalPrice} {props.user.userInfo.curr}</p>
                     </div>
                     <Rating
                     readOnly 
@@ -216,7 +216,7 @@ function OrganizerBid(props) {
                                 </div>
 
                                 <div className="col-3">
-                                <p className="service-price">${service.price}</p>
+                                <p className="service-price">{service.price} {props.user.userInfo.curr}</p>
                                 <p className="service-quantity">{service.quantity} {service.unit}</p>
                                 </div>
                             </div>
