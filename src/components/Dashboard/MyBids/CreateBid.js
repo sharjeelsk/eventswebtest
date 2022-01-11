@@ -285,7 +285,7 @@ function CreateBid(props) {
                                         <td data-label="Name">{item.category}</td>
                                         <td data-label="Age">{item.subCategory}</td>
                                         <td data-label="Job">{item.quantity} {item.unit}</td>
-                                        <td data-label="Job">{item.price} {props.user.userInfo.curr}</td>
+                                        <td data-label="Job">{item.price} {props.EventUser.userInfo.curr}</td>
                                     </tr>
                                     ))}
                                     </tbody>
