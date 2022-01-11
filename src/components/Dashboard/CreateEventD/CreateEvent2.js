@@ -209,12 +209,13 @@ function CreateEvent2(props) {
             onError={(error)=>error==="invalidDate"?setError("Invalid Date"):setError("")}
             value={end}
             onChange={(newValue) => {
-            // if(newValue<start){
-            //   console.log(newValue,start)
-            //     setError("End Date should be greater than start")
-            // }else{
-                setEnd(newValue);
-            //}
+            if(newValue<start){
+              console.log(newValue,start)
+                setError("End Date should be greater than start")
+            }else{
+              setError("")
+               setEnd(newValue);
+            }
             
             }}
             renderInput={(params) => <TextField 

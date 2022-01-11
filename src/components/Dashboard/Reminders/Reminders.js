@@ -11,6 +11,7 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import TwoBDialog from '../../utils/TwoBDialog'
+import {storeUserInfo} from '../../redux/user/userActions'
 function Reminders(props) {
     const [display,setDisplay]=React.useState(false)
     const [data,setData]=React.useState([])
@@ -47,6 +48,9 @@ function Reminders(props) {
     .then(res=>{
         console.log(res)
         setData(res.data.result)
+        let userinfo = props.user.userInfo;
+        userinfo.reminderCount=res.data.result.length
+        props.storeUserInfo(userinfo)
     })
     .catch(err=>{
         console.log(err)
@@ -110,4 +114,10 @@ const mapStateToProps =({EventUser})=>{
     }
 }
 
-export default connect(mapStateToProps)(Reminders)
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        storeUserInfo:(user)=>dispatch(storeUserInfo(user))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Reminders)
