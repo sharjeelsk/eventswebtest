@@ -115,6 +115,8 @@ const Dashboard = (props) => {
 
             <div onClick={()=>setDisplay(false)}>
             <div style={{ height: '50vh', width: '100%' }}>
+            {/* AIzaSyDa3zC3zgOqGZq-yIVdixTmOuB27nNfqgs */}
+            {/* AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4 */}
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
           defaultCenter={location.center}

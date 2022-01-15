@@ -11,6 +11,7 @@ import OwnMarker from '../../utils/Marker/OwnMarker';
 import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import axios from 'axios'
 
 
 function CreateEvent(props) {
@@ -32,6 +33,19 @@ function CreateEvent(props) {
     React.useEffect(()=>{
       //console.log(navigator);
       getGeo()
+      var config = {
+        method: 'get',
+        url: 'https://maps.googleapis.com/maps/api/place/dubai/json?input=%2B16502530000&inputtype=phonenumber&key=AIzaSyDa3zC3zgOqGZq-yIVdixTmOuB27nNfqgs',
+        headers: {"Access-Control-Allow-Origin": "*"}
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     },[])
 
 
