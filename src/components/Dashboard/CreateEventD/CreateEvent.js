@@ -12,14 +12,22 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import axios from 'axios'
-
-
+import PlacesAutocomplete from 'react-places-autocomplete';
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete';
 function CreateEvent(props) {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
     const [eventLocation,setEventLocation]=React.useState({})
     const [loc,setLoc]=React.useState([])
     const [error,setError]=React.useState("")
+    const [address,setAddress]=React.useState("")
+
+ 
+
     const handlePress = (ar)=>{
       //let point = {lat:ar.lat,lng:ar.lng,accuracy:99.999}
       setEventLocation(regionFrom(ar.lat,ar.lng,99.999))
@@ -33,21 +41,21 @@ function CreateEvent(props) {
     React.useEffect(()=>{
       //console.log(navigator);
       getGeo()
-      var config = {
-        method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/dubai/json?input=%2B16502530000&inputtype=phonenumber&key=AIzaSyDa3zC3zgOqGZq-yIVdixTmOuB27nNfqgs',
-        headers: {"Access-Control-Allow-Origin": "*"}
-      };
-      
-      axios(config)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    
     },[])
 
+    
+  const handleChange = address => {
+    setAddress(address);
+  };
+
+
+    const handleSelect = address => {
+      geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => console.log('Success', latLng))
+        .catch(error => console.error('Error', error));
+    };
 
     
     
@@ -67,6 +75,58 @@ function CreateEvent(props) {
         <div onClick={()=>setDisplay(false)} className="createEventDiv">
         <div style={{ height: '90vh', width: '100%' }} >
           <h1 >Click to select event location</h1>
+         
+        {/* auto compelte html */}
+
+        <PlacesAutocomplete
+        value={address}
+        onChange={handleChange}
+        onSelect={handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <input
+              {...getInputProps({
+                placeholder: 'Search Places ...',
+                className: 'location-search-input',
+              })}
+            />
+            <div className="autocomplete-dropdown-container">
+              {loading && <div>Loading...</div>}
+              {suggestions.map(suggestion => {
+                const className = suggestion.active
+                  ? 'suggestion-item--active'
+                  : 'suggestion-item';
+                // inline style for demonstration purpose
+                const style = suggestion.active
+                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                return (
+                  <div
+                    {...getSuggestionItemProps(suggestion, {
+                      className,
+                      style,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
+
+      {/* auto complete html end */}
+
+
+
+
+
+
+
+
+
     <GoogleMapReact
     onClick={(ar)=>handlePress(ar)}
       bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
