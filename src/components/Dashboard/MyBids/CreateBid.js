@@ -165,7 +165,6 @@ function CreateBid(props) {
           multiline
           rows={2}
           onChange={(e)=>setDescription(e.target.value)}
-          defaultValue="The best product descriptions address your target person directly and personally"
           fullWidth
         />
             <h1 className="heading">Select your services</h1>
