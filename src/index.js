@@ -8,6 +8,13 @@ import { createTheme,ThemeProvider } from '@mui/material/styles';
 import { PersistGate } from 'redux-persist/integration/react'
 
 const theme = createTheme({
+  typography: {
+    "fontFamily": `'El Messiri', 'sans-serif'`,
+    "fontSize": 14,
+    "fontWeightLight": 500,
+    "fontWeightRegular": 500,
+    "fontWeightMedium": 700
+   },
   palette: {
     primary: {
       main: "#5a1e96",

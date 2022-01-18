@@ -172,14 +172,14 @@ function CreateEvent2(props) {
          </span>
 
         <div className="createEventDiv2 shadow-sm" onClick={()=>setDisplay(false)}>
-        <h1 className="heading1">Create Event</h1>
+        <h1 className="heading1">Create an Event</h1>
 
         <form  onSubmit = {handleSubmit(onSubmit)}>
         <div className="inputdiv">
         <TextField 
         inputProps={{ maxLength: 20 }}
         {...register('eventName',{required:true})}
-        fullWidth className="input" id="standard-basic" label="Event Name" variant="standard"  />
+        fullWidth className="input" id="standard-basic" label="Create Event Name" variant="standard"  />
 
         <div className="datetimepicker">
         <LocalizationProvider 

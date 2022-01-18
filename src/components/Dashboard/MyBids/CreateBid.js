@@ -77,7 +77,7 @@ function CreateBid(props) {
         
         let finalS = [];
         if(description.length<=0){
-            setError("Description is must")
+            setError("Please fill the mandatory field")
         }else{
             if(selection.length>0){
                 finalS = selection.map(item=>services[item-1])

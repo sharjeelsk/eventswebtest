@@ -7,13 +7,15 @@ $grey:#a1a1a1;
 $green:#13a100;
 
 $primary-font:'Montserrat', sans-serif;
-$secondary-font:'Roboto', sans-serif;
+//$secondary-font:'Roboto', sans-serif;
+// $primary-font:'Gilda Display', serif;
+ $secondary-font: 'El Messiri', sans-serif;
 h1,h2,h3,h5{
-  font-family: 'Montserrat', sans-serif;
+  font-family: $primary-font;
 
 }
 p{
-  font-family: 'Roboto', sans-serif;
+  font-family: $secondary-font;
   font-weight: 400;
 }
 
