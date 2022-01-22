@@ -12,20 +12,28 @@ import Tooltip from '@mui/material/Tooltip'
 import FailureScreen from '../../../utils/FailureScreen'
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import Button from '@mui/material/Button'
+import TwoBDialog from '../../../utils/TwoBDialog'
 function MyGroups(props) {
     const [display,setDisplay]=React.useState(false)
     const [data,setData] = React.useState([])
-    React.useEffect(()=>{
+    const [open,setOpen]=React.useState(false)
+    const [flag,setFlag]=React.useState(false)
+    const [id,setId]=React.useState("")
+    
+    const getGroups = ()=>{
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/single-userContact`,{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res);
-            if(res.data.result.groups.length>0){
                 setData(res.data.result.groups)
-            }
         })
         .catch(err=>{
             console.log(err);
         })
+    }
+    
+    React.useEffect(()=>{
+       getGroups()
     },[])
 
     const renderList =(list)=>{
@@ -54,6 +62,18 @@ function MyGroups(props) {
         }
     }
 
+    const handleSubmit = ()=>{
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/delete-group`,{groupName:id},{headers:{token:props.user.user}})
+        .then(res=>{
+            console.log(res);
+            setOpen(false)
+           getGroups()
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
     return (
         <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -68,14 +88,28 @@ function MyGroups(props) {
          </span>
 
         <div onClick={()=>setDisplay(false)}>
+        <TwoBDialog title="Delete Group" description="Are you sure you want to delete this group"
+        rightButton="Delete"
+        leftButton="Cancel"
+        open={open}
+        setOpen={setOpen}
+        handleSubmit={handleSubmit}
+        />
         <h1 className="mt-3 mb-4">My Groups <GroupsRoundedIcon /></h1>
         <div className="row parent-group">
         {
             data.length>0?(
                 data.map((item,index)=>(
-                    <div onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list})} className="mx-3 shadow-sm  group-container" key={index}>
+                    <div  className="mx-3 shadow-sm  group-container" key={index}>
                         <h2 className="group-heading">{item.groupName}</h2>
                         {renderList(item.list)}
+                        <div className="mx-auto mt-4 row justify-content-between">
+                        <Button onClick={()=>{
+                            setId(item.groupName);
+                            setOpen(true)
+                        }}>Delete</Button>
+                        <Button onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list})} variant="contained">Details</Button>
+                        </div>
                     </div>
                 ))
             ):<FailureScreen title="You haven't added any groups" icon={<GroupsRoundedIcon sx={{fontSize:"4em"}} color="primary" />} />
