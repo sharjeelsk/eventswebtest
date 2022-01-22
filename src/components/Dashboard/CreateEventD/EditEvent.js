@@ -80,7 +80,6 @@ function EditEvent(props) {
             {"propName" : "email", "value": email},
             {"propName" : "address", "value": address},
             {"propName" : "description", "value": data.description},
-            {"propName" : "type", "value": type.toUpperCase()},
             {"propName" : "start", "value": start},
             {"propName" : "end", "value": end},
             {"propName" : "reqServices", "value": tagList},
@@ -100,31 +99,7 @@ function EditEvent(props) {
         })
     }
 
-    const onSubmit2 = ()=>{
-        if(code.length<=0 || privatephone.length<=0){
-            setError("Enter Valid Inputs")
-        }else{
-            setError("")
-            console.log(code);
-        let e = false
-        let codee = countries.filter(item=>item.label===code)
-        let number = '+'+codee[0].phone+privatephone;
-        let obj = {}
-        obj[number]="web"
-        privateNumberList.forEach(i=>{
-            if(Object.keys(i)[0]===number){
-                e=true
-                setError("Already Added")
-            }
-        })
-        if(!e){
-            setPrivateNumberList([...privateNumberList,obj])
-        }
-        
-        }
-        
-        //console.log(code,number);
-    }
+    
     console.log(details);
 
     return (
@@ -203,7 +178,7 @@ function EditEvent(props) {
         inputProps={{ maxLength: 95 }}
         {...register('eventAddress',{required:true})}
         fullWidth className="input" id="standard-basic" label="Event Address" variant="standard" />
-        <RadioGroup
+        {/* <RadioGroup
         row
         aria-label="Event Type"
         defaultValue="Public"
@@ -214,74 +189,74 @@ function EditEvent(props) {
         <FormControlLabel value="Public" control={<Radio />} label="Public" />
         <FormControlLabel value="Private" control={<Radio />} label="Private" />
         
-      </RadioGroup>
+      </RadioGroup> */}
         </div>
         {
-            type==="Private"?(
-                <div className="privatediv">
-                    <h1>Invite People</h1>
-                    <Autocomplete
-                    className="autocomplete"
-        onInputChange={(e,n)=>setCode(n)}
-      id="country-select-demo"
-      options={countries}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img
-            loading="lazy"
-            width="20"
-            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            alt=""
-          />
-          {option.label} ({option.code}) +{option.phone}
-        </Box>
-      )}
-      renderInput={(params) => (
+  //           type==="Private"?(
+  //               <div className="privatediv">
+  //                   <h1>Invite People</h1>
+  //                   <Autocomplete
+  //                   className="autocomplete"
+  //       onInputChange={(e,n)=>setCode(n)}
+  //     id="country-select-demo"
+  //     options={countries}
+  //     autoHighlight
+  //     getOptionLabel={(option) => option.label}
+  //     renderOption={(props, option) => (
+  //       <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+  //         <img
+  //           loading="lazy"
+  //           width="20"
+  //           src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+  //           srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+  //           alt=""
+  //         />
+  //         {option.label} ({option.code}) +{option.phone}
+  //       </Box>
+  //     )}
+  //     renderInput={(params) => (
           
-        <TextField
-          {...params}
-          label="Choose a country"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-        />
+  //       <TextField
+  //         {...params}
+  //         label="Choose a country"
+  //         inputProps={{
+  //           ...params.inputProps,
+  //           autoComplete: 'new-password', // disable autocomplete and autofill
+  //         }}
+  //       />
         
-      )}
-    />
-    <TextField
-    variant="outlined"
-    className="mobilenumber"
-    label="Mobile Number"
-    value={privatephone}
-    onChange={(e)=>setPrivatePhone(e.target.value)}
-    onInput = {(e) =>{
-      e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
-  }}
-    />
-    <Button className="addbutton" onClick={()=>onSubmit2()} variant="contained" type="submit">Add Number</Button>
-    {
-        privateNumberList.length>0?(
-            privateNumberList.map((item,index)=>(
-                    <Chip
-                    className="numberchip"
-        label={Object.keys(item)[0]}
-        deleteIcon={<ClearIcon />}
-        //onClick={handleClick}
-        onDelete={()=>{
-            let arr = privateNumberList.filter(e=>e!==item)
-            setPrivateNumberList(arr)
-        }}
-      />
+  //     )}
+  //   />
+  //   <TextField
+  //   variant="outlined"
+  //   className="mobilenumber"
+  //   label="Mobile Number"
+  //   value={privatephone}
+  //   onChange={(e)=>setPrivatePhone(e.target.value)}
+  //   onInput = {(e) =>{
+  //     e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+  // }}
+  //   />
+  //   <Button className="addbutton" onClick={()=>onSubmit2()} variant="contained" type="submit">Add Number</Button>
+  //   {
+  //       privateNumberList.length>0?(
+  //           privateNumberList.map((item,index)=>(
+  //                   <Chip
+  //                   className="numberchip"
+  //       label={Object.keys(item)[0]}
+  //       deleteIcon={<ClearIcon />}
+  //       //onClick={handleClick}
+  //       onDelete={()=>{
+  //           let arr = privateNumberList.filter(e=>e!==item)
+  //           setPrivateNumberList(arr)
+  //       }}
+  //     />
                     
-            ))
-        ):null
-    }
-                </div>
-            ):null
+  //           ))
+  //       ):null
+  //   }
+  //               </div>
+  //           ):null
         }
 
         <h1>Contact Info</h1>
