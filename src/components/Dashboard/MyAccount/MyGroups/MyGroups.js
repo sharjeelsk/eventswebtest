@@ -25,7 +25,11 @@ function MyGroups(props) {
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/single-userContact`,{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res);
+            if(res.data.result==="No Contacts"){
+                setData([])
+            }else{
                 setData(res.data.result.groups)
+            }
         })
         .catch(err=>{
             console.log(err);
@@ -108,7 +112,7 @@ function MyGroups(props) {
                             setId(item.groupName);
                             setOpen(true)
                         }}>Delete</Button>
-                        <Button onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list})} variant="contained">Details</Button>
+                        <Button onClick={()=>props.history.push("/crudgroup",{route:true,list:item.list,name:item.groupName})} variant="contained">Details</Button>
                         </div>
                     </div>
                 ))

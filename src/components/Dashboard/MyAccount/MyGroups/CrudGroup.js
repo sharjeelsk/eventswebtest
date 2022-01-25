@@ -29,6 +29,7 @@ function CrudGroup(props) {
             let obj = Object.fromEntries(props.location.state.list)
             setMobileNumberList(obj)
         }
+        setGroupName(props.location.state.name)
     },[])
 
     const handleSubmit = ()=>{
@@ -76,7 +77,7 @@ console.log(Object.entries(mobileNumberList));
 
     const renderForm = ()=>{
         return <form className="groupform">
-            <TextField className="my-3" onChange={(e)=>setGroupName(e.target.value)} fullWidth id="outlined-basic" label="Group Name" variant="outlined" />
+            <TextField className="my-3" value={groupName} onChange={(e)=>setGroupName(e.target.value)} fullWidth id="outlined-basic" label="Group Name" variant="outlined" />
             <TextField className="my-3" onChange={(e)=>setName(e.target.value)} fullWidth id="outlined-basic" label="Name" variant="outlined" />
             <TextField className="my-3" onChange={(e)=>setMobileNumber(e.target.value)} fullWidth id="outlined-basic" label="Mobile Number" variant="outlined" />
             <Alert severity="warning">make sure to include dial code before phone number, example : "+91123456789"</Alert>
