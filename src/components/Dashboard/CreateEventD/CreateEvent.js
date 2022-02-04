@@ -41,6 +41,19 @@ function CreateEvent(props) {
     React.useEffect(()=>{
       //console.log(navigator);
       getGeo()
+      // var config = {
+      //   method: 'get',
+      //   url: 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=amoeba&types=establishment&location=37.76999%2C-122.44696&radius=500&key=AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4',
+      //   headers: { }
+      // };
+      
+      // axios(config)
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
     
     },[])
 
