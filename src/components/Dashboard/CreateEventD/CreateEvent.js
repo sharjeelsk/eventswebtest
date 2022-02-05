@@ -91,7 +91,7 @@ function CreateEvent(props) {
          
         {/* auto compelte html */}
 
-        <PlacesAutocomplete
+        {/* <PlacesAutocomplete
         value={address}
         onChange={handleChange}
         onSelect={handleSelect}
@@ -128,7 +128,7 @@ function CreateEvent(props) {
             </div>
           </div>
         )}
-      </PlacesAutocomplete>
+      </PlacesAutocomplete> */}
 
       {/* auto complete html end */}
 
