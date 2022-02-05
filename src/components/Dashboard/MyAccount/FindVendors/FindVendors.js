@@ -101,7 +101,7 @@ function FindVendors(props) {
                                     </div>
 
                                     <div className="col-3">
-                                    <p className="service-price">${service.price}</p>
+                                    <p className="service-price">{service.price} {props.user.userInfo.curr}</p>
                                     <p className="service-quantity">{service.quantity}</p>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@ function FindVendors(props) {
                                     </div>
 
                                     <div className="col-3">
-                                    <p className="service-price">${service.price}</p>
+                                    <p className="service-price">{service.price} {props.user.userInfo.curr}</p>
                                     <p className="service-quantity">{service.quantity}</p>
                                     </div>
                                 </div>
