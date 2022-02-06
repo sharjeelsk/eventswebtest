@@ -62,7 +62,7 @@ const MyBids = (props) => {
               {
                 mybids.length>0?(
                   mybids.map((item,index)=>(
-                    <div key={index}  className="cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                    <div key={index}  className={item.status.toLowerCase()!=="over"?"cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`":"cardheadgrey col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`"}>
                       <div className="row justify-content-between">
                       <h2 className="col-10">{item.name}</h2>
                       <p className="col-2 subs">{item.totalSubs} Joined</p>

@@ -31,6 +31,9 @@ function FeedBackForm(props) {
     const [responses,setResponses]=React.useState([])
 
     React.useEffect(()=>{
+        if(props.location.state.form.length>0){
+            setFormInputs(props.location.state.form[0].formData)
+        }
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/eventForm/event-feedbacks`, {eventId: props.location.state._id},{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res)
@@ -52,7 +55,9 @@ function FeedBackForm(props) {
     }
 
     const filterForm = (item)=>{
+        console.log(item);
         let arr = formInputs.filter(items=>items!==item)
+        console.log(arr);
         setFormInputs(arr)
     }
 
@@ -60,12 +65,13 @@ function FeedBackForm(props) {
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/eventForm/create-eventForm`,{eventId: props.location.state._id, formData:formInputs},{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res)
+            props.history.push("mycreation")
         })
         .catch(err=>{
             console.log(err);
         })
     }
-
+console.log("form inputs",formInputs);
     const renderInput =(item)=>{
         if(item.input===1){
             return <div className="row align-items-center justify-content-between">
@@ -134,7 +140,7 @@ function FeedBackForm(props) {
         <div className="col-7 feedbackform mx-auto shadow-sm">
             <h2>Form review</h2>
             {
-                props.location.state.form.length>0?props.location.state.form[0].formData.map((item,index)=>(
+                formInputs>0?formInputs.map((item,index)=>(
                     <div key={index}>
                         {
                             renderInput(item)
