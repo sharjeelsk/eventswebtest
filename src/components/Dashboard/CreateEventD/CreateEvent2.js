@@ -27,6 +27,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Switch from '@mui/material/Switch';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
+import fx from 'money'
 function CreateEvent2(props) {
     const {register,handleSubmit,formState:{errors}}=useForm()
     let userInfo = props.user.userInfo
@@ -56,8 +57,19 @@ function CreateEvent2(props) {
     const [selectedGroups,setSelectedGroups]=React.useState([])
     const [tagTotal,setTagTotal]=React.useState(0)
     const [error,setError]=React.useState("")
+    const [currency,setCurrency]=React.useState({})
+
+
+    const getCurr = async ()=>{
+      console.log(props.user.userInfo.curr);
+      const res = await axios.get(`https://freecurrencyapi.net/api/v2/latest?apikey=e342da80-89cc-11ec-b105-457f4145383a&base_currency=${props.user.userInfo.curr}`)
+      console.log(res)
+      setCurrency(res.data.data)
+    }
 
     React.useEffect(()=>{
+      getCurr()
+      console.log(fx)
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/category/all-category`,{headers:{token:props.user.user}})
         .then(res=>{
             console.log(res)
@@ -391,12 +403,15 @@ function CreateEvent2(props) {
                         if(tagList.includes(item.name)){
                             let filteredarray = tagList.filter(e=>e!==item.name)
                             let num = parseInt(item.approximation);
-                            setTagTotal(tagTotal-num)
+                          let val = currency[item.currency]
+                          let total = num/val
+                            setTagTotal(tagTotal-total)
                             setTagList(filteredarray)
                         }else{
                           let num = parseInt(item.approximation);
-                          console.log(num);
-                          setTagTotal(tagTotal+num)
+                          let val = currency[item.currency]
+                          let total = num/val
+                            setTagTotal(tagTotal+total)
                             setTagList([...tagList,item.name])
                         }
                     }}
@@ -409,7 +424,7 @@ function CreateEvent2(props) {
             </FormGroup>
          {tagTotal!==0?
          <div style={{margin:"2% 20%"}}>
-         <p style={{fontWeight:"bold",fontSize:"1.2em"}}>Approximate cost : ${tagTotal}</p>
+         <p style={{fontWeight:"bold",fontSize:"1.2em"}}>Approximate cost : {Math.floor(tagTotal)} {props.user.userInfo.curr}</p>
          <p style={{color:"#ccc"}}><i>Note : approximate cost is on an average cost you'll require for your event if you have selected specific tags, this is not an actual cost, cost may vary from place to place</i></p>
          </div>
          :null}

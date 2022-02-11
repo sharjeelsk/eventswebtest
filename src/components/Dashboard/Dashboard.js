@@ -22,6 +22,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SearchIcon from '@mui/icons-material/Search';
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
@@ -139,7 +140,7 @@ const Dashboard = (props) => {
       
             {/* <h1><MapOutlinedIcon sx={{fontSize:"2em"}}/> Nearby Events</h1>    */}
             <div className="searchdiv">
-            <TextField fullWidth 
+            {/* <TextField fullWidth 
             // InputProps={{
             //   startAdornment: (
             //     <InputAdornment position="start">
@@ -148,7 +149,11 @@ const Dashboard = (props) => {
             //   ),
             // }}
             onChange={(e)=>setSearchResult(e.target.value)}
-            id="filled-basic" label="Search event by name" variant="filled" />
+            id="filled-basic" label="Search event by name" variant="filled" /> */}
+            <div className="row align-items-center input">
+              <SearchIcon sx={{fontSize:"2em"}} />
+            <input placeholder="Search event by name" onChange={(e)=>setSearchResult(e.target.value)} />
+            </div>
             </div> 
 
             <div>

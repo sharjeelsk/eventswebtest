@@ -57,7 +57,6 @@ function AddServices(props) {
             let arr = mainCategory.filter(item=>item.name===mainCategoryR)
             if(arr.length>0){
                 categoryId=arr[0]._id
-            }
                 axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory, quantity:data.quantity, price:data.price,unit},{headers:{token:props.EventUser.user}})
                 .then(res=>{
                     console.log(res);
@@ -72,6 +71,10 @@ function AddServices(props) {
                     setLoading(false)
                     console.log(err)
                 })
+            }else{
+              setError("Category dosen't exists, please select from dropdown")
+            }
+            
         }
     }
     console.log(dataList);
@@ -95,6 +98,20 @@ function AddServices(props) {
        
         <form onSubmit = {handleSubmit(onSubmit)} className="addservicesform" >
         <div className="auto-complete-div">
+        {/* <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={mainCategoryR}
+          label="Age"
+          onChange={(e)=>setMainCategoryR(e)}
+        >
+          {
+            mainCategory.map((option) => <MenuItem value = {option.name}>{option.name}</MenuItem>)
+          }
+        </Select>
+      </FormControl> */}
         <Autocomplete
         onInputChange={(e,n)=>setMainCategoryR(n)}
         id="free-solo-demo"

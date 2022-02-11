@@ -12,6 +12,27 @@ h1{
 }
 .searchdiv{
   margin:2% 25%;
+  .input{
+    padding:1% 2%;
+    outline: none;
+    border: none;
+    box-shadow: .1px .1px 5px #cccf;
+    border-radius: 20px;
+    background-color: rgba(204, 204, 204, 0.212);
+
+  }
+  input{
+    width: 90%;
+    border:none;
+    background-color: transparent;
+    font-size: 1.2em;
+  }
+  input::placeholder{
+    color: rgb(158, 158, 158);
+  }
+  input:focus{
+    outline: none;
+  }
 }
 
 }
