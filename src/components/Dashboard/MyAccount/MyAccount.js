@@ -27,6 +27,7 @@ import Button from '@mui/material/Button'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LogoutIcon from '@mui/icons-material/Logout';
 import storageSession from 'redux-persist/lib/storage/session'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import EditFormDialogue from '../../utils/EditFormDialogue'
 import Footer from '../../Footer/Footer'
@@ -77,8 +78,68 @@ function MyAccount(props) {
 
         <div className="  " onClick={()=>setDisplay(false)}>
         <EditFormDialogue getUser={getUser} open={open} setOpen={setOpen} />
+
+        <div className="shadow-sm profile-container">
+            {userInfo.img?<img className='profile' src={`${process.env.REACT_APP_DEVELOPMENT}/api/user/image/${userInfo.img}`} alt="img" />:<img className='profile' src={profile} alt="profile" />}
+            <h1>Hi, {userInfo.name}</h1>
+            <div className="row m-auto justify-content-between">
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                <p className="key">Name</p>
+                <p className="value">{userInfo.name}</p>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                    <p className="key">Mobile</p>
+                    <p className="value">{userInfo.mobileNo}</p>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                    <p className="key">Email</p>
+                    <p className="value">{userInfo.email}</p>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                    <p className="key">Organisation</p>
+                    <p className="value">{userInfo.organisation}</p>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                    <p className="key">City</p>
+                    <p className="value">{userInfo.city}</p>
+                </div>
+
+                <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
+                    <p className="key">Address</p>
+                    <p className="value">{userInfo.address}</p>
+                </div>
+            </div>
+
+            <div className="linkscontainer">
+                <hr />
+                <div onClick={()=>props.history.push("/myapprovals")} className="row m-auto justify-content-between">
+                    <h3>My Approvals</h3>
+                    <ArrowForwardIosIcon />
+                </div>
+                <hr />
+                <div onClick={()=>props.history.push("/mygroups")} className="row m-auto justify-content-between">
+                    <h3>My Groups</h3>
+                    <ArrowForwardIosIcon />
+                </div>
+                <hr />
+                <div  onClick={()=>props.history.push("/myservices")} className="row m-auto justify-content-between">
+                    <h3>My Services</h3>
+                    <ArrowForwardIosIcon />
+                </div>
+                <hr />
+                <div onClick={()=>props.history.push("/findvendors")} className="row m-auto justify-content-between">
+                    <h3>Find Vendors</h3>
+                    <ArrowForwardIosIcon />
+                </div>
+            </div>
+
+        </div>
         
-        <div className="shadow-sm row align-items-center profilediv">
+        {/* <div className="shadow-sm row align-items-center profilediv">
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 imagediv">
         {userInfo.img?<img src={`${process.env.REACT_APP_DEVELOPMENT}/api/user/image/${userInfo.img}`} alt="img" />:<img src={profile} alt="profile" />}
         </div>
@@ -117,7 +178,7 @@ function MyAccount(props) {
         </div>
         <div className="logoutbuttondiv">
         <Button onClick={()=>handleLogout()} className="logoutbutton" variant="contained">Logout <LogoutIcon sx={{marginLeft:1}} /></Button>
-        </div>
+        </div> */}
 
 
         <div style={{position:"fixed",bottom:"5%",right:"5%"}}>

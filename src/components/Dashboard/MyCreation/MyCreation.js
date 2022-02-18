@@ -15,6 +15,7 @@ import FailureScreen from '../../utils/FailureScreen';
 import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TwoBDialog from '../../utils/TwoBDialog'
+import Chip from '@mui/material/Chip'
 import SimpleBackdrop from '../../utils/SimpleBackdrop'
 const MyCreation = (props) => {
     const [creation,setCreation]=React.useState([])
@@ -84,7 +85,10 @@ const MyCreation = (props) => {
                   creation.map((item,index)=>(
                     <div key={index}  className={item.status.toLowerCase()!=="over"?"cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`":"cardheadgrey col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`"}>
                       <div className="row justify-content-between">
-                      <h2 className="col-11">{item.name}</h2>
+                      <div className="col-11">
+                      <h2 className="">{item.name}</h2>
+                      <p className="mb-3 subs">{item.totalSubs} people have joined</p>
+                      </div>
                       <div className="col-1">
                       <IconButton onClick={()=>{
                         setDeleteId(item._id)
@@ -94,23 +98,18 @@ const MyCreation = (props) => {
                       </div>
                       </div>
 
-                      <div className="row">
-                      <div className="col-9 chipdiv">
-                      <span className="private">{item.type}</span>
-                      <span className="status-red">{item.status}</span>
-                      </div>
-                      <p className="col-3 subs">{item.totalSubs} Joined</p>
-
+                      <div className="chipdiv">
+                      <Chip label={item.status} color={item.status==="Live"?"primary":"default"} />
                       </div>
 
-                      <div className="row">
-                        <div className="col-6">
+                      <div className="descriptioncontainer">
+                        <h5>Description</h5>
                         <p>{item.description}</p>
-                        </div>
-                        <div className="col-6">
-                        <p className="start">Start : {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
-                        <p className="end">End : {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
-                        </div>
+                      </div>
+
+                      <div className="timecontainer">
+                        <p className="starts"><b>starts :</b> {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
+                        <p><b>ends :</b> {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                       </div>
 
                       <div className="row justify-content-between cardbuttondiv">

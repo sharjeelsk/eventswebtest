@@ -18,10 +18,12 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import SimpleBackdrop from '../utils/SimpleBackdrop';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Chip from '@mui/material/Chip'
 import SearchIcon from '@mui/icons-material/Search';
 const Dashboard = (props) => {
     const [display,setDisplay]=React.useState(false)
@@ -218,18 +220,26 @@ const Dashboard = (props) => {
               {
                 data.length>0?(
                   data.map((item,index)=>(
-                    item.type.toLowerCase()!=="private"?<div onClick={()=>props.history.push("/eventdetail",item)} key={index} className={item.status.toLowerCase()!=="over"?"cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`":"cardheadgrey col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`"}>
+                    item.type.toLowerCase()!=="private"?<div onClick={()=>props.history.push("/eventdetail",item)} key={index} className={item.status.toLowerCase()!=="over"?"shadow cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`":"cardheadgrey col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`"}>
                       <div className="row justify-content-between">
-                      <h2 className="col-10">{item.name}</h2>
-                      <p className="col-2 subs">{item.totalSubs} Joined</p>
+                      <h2 className="col-8">{item.name}</h2>
+                      <p className="col-4 subs">{item.totalSubs} People have joined</p>
                       </div>
 
                       <div className="chipdiv">
-                      <span className="private">{item.type}</span>
-                      <span className="status-red">{item.status}</span>
+                      <Chip label={item.status} color={item.status==="Live"?"primary":"default"} />
                       </div>
 
-                      <div className="row">
+                      <div className="descriptioncontainer">
+                        <h5>Description</h5>
+                        <p>{item.description}</p>
+                      </div>
+
+                      <div className="timecontainer">
+                        <p className="starts"><b>starts :</b> {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
+                        <p><b>ends :</b> {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
+                      </div>
+                      {/* <div className="row">
                         <div className="col-6">
                         <p>{item.description}</p>
                         </div>
@@ -237,7 +247,7 @@ const Dashboard = (props) => {
                         <p className="start">Start : {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                         <p className="end">End : {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                         </div>
-                      </div>
+                      </div> */}
 
                     </div>:null
                   ))

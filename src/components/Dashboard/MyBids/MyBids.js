@@ -15,6 +15,7 @@ import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
 import SimpleBackdrop from '../../utils/SimpleBackdrop'
 import FailureScreen from '../../utils/FailureScreen';
 import CloudOffOutlinedIcon from '@mui/icons-material/CloudOffOutlined';
+import Chip from '@mui/material/Chip'
 const MyBids = (props) => {
     const [mybids,setMyBids]=React.useState([])
     const [error,setError] = React.useState("")
@@ -63,24 +64,28 @@ const MyBids = (props) => {
                 mybids.length>0?(
                   mybids.map((item,index)=>(
                     <div key={index}  className={item.status.toLowerCase()!=="over"?"cardhead col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`":"cardheadgrey col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5`"}>
-                      <div className="row justify-content-between">
-                      <h2 className="col-10">{item.name}</h2>
-                      <p className="col-2 subs">{item.totalSubs} Joined</p>
+                     <div className="row justify-content-between">
+                      <div className="col-9">
+                      <h2 className="">{item.name}</h2>
+                      </div>
+                      <div className="col-3">
+                      <p className="mb-3 subs">{item.totalSubs} people have joined</p>
+                      </div>
+                      
                       </div>
 
                       <div className="chipdiv">
-                      <span className="private">{item.type}</span>
-                      <span className="status-red">{item.status}</span>
+                      <Chip label={item.status} color={item.status==="Live"?"primary":"default"} />
                       </div>
 
-                      <div className="row">
-                        <div className="col-6">
+                      <div className="descriptioncontainer">
+                        <h5>Description</h5>
                         <p>{item.description}</p>
-                        </div>
-                        <div className="col-6">
-                        <p className="start">Start : {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
-                        <p className="end">End : {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
-                        </div>
+                      </div>
+
+                      <div className="timecontainer">
+                        <p className="starts"><b>starts :</b> {moment.parseZone(item.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
+                        <p><b>ends :</b> {moment.parseZone(item.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                       </div>
 
                       <div className="row justify-content-between cardbuttondiv">

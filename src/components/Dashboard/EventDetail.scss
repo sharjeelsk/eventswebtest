@@ -10,8 +10,8 @@
         font-weight: 400;
     }
     .eventDetaildiv{
-        margin:2% 10%;
-        background-color: white;
+        margin:2% 5%;
+        background: linear-gradient(to bottom right, $extraLightPink, $lightPink, $pink);
         padding:2% 5%;
         border-radius: 10px;
     }
@@ -31,7 +31,7 @@
     .timediv{
         margin:3% 0;
         p{
-            background-color: $white;
+            background-color: #23014411;
             padding:2%;
             margin:auto;
             border-radius: 5px;

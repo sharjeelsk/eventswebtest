@@ -1,66 +1,112 @@
 @import "../../../App.scss";
 
-.myaccountdiv{
-    background-color: #f7f7f7;
-    .profilediv{
-        background-color: #fff;
-        margin:4% 10%;
-        padding:2% 0;
-        border-radius: 5px;
+
+
+
+
+.profile-container{
+    margin: 2% 15%;
+    padding:2% 5%;
+    background: linear-gradient(to bottom right, $extraLightPink, $lightPink, $pink);
+    .profile{
+        width: 10vw;
+        display: block;
+        margin: auto;
+        border-radius: 100%;
+        border: 2px solid $purple;
     }
-    .imagediv{
+    
+    h1{
         text-align: center;
+        font-weight: bold;
+
     }
     .infodiv{
-        h2{
-            font-weight: 500;
+        text-align: center;
+        background-color: #23014411;
+        padding:2%;
+        margin: 2%;
+        border-radius: 10px;
+        .value{
+            font-size: 1.1em;
+            font-weight: bold;
         }
-        p{
-            font-size: 1.2em;
-            font-weight: 300;
+        .key{
+            color: #a1a1a1;
         }
     }
-  img{
-      height: 50%;
-      width: 50%;
-      border-radius: 100%;
-      border: 5px solid $purple;
+    .linkscontainer{
+        .row{
+            padding:1% 2%;
+        }
+        .row:hover{
+            cursor: pointer;
+            background-color: #23014411;
+        }
+    }
+}
+
+// .myaccountdiv{
+//     background-color: #f7f7f7;
+//     .profilediv{
+//         background-color: #fff;
+//         margin:4% 10%;
+//         padding:2% 0;
+//         border-radius: 5px;
+//     }
+//     .imagediv{
+//         text-align: center;
+//     }
+//     .infodiv{
+//         h2{
+//             font-weight: 500;
+//         }
+//         p{
+//             font-size: 1.2em;
+//             font-weight: 300;
+//         }
+//     }
+//   img{
+//       height: 50%;
+//       width: 50%;
+//       border-radius: 100%;
+//       border: 5px solid $purple;
       
-  }  
+//   }  
  
 
-.approvaldiv{
-    margin:0 11%;
+// .approvaldiv{
+//     margin:0 11%;
     
-    .cardiv{
-        background-color: #fff;
-        margin:2% 1%;
-        padding:2%;
-        .cardIcon{
-            font-size: 2em;
-        }
-        .cardheading{
-            margin-left: 3%;
-            font-size: 1.5em;
-            font-weight: 350;
-        }
-    }
-    .cardiv:hover{
-        cursor: pointer;
-        transition: .2s;
-        background: $pink;
-        transform: scale(1.1);
-    }
-}
-.logoutbuttondiv{
-    text-align: center;
-}
-.logoutbutton{
-    margin:2% auto !important;
-    padding:.8% 3%;
-}
+//     .cardiv{
+//         background-color: #fff;
+//         margin:2% 1%;
+//         padding:2%;
+//         .cardIcon{
+//             font-size: 2em;
+//         }
+//         .cardheading{
+//             margin-left: 3%;
+//             font-size: 1.5em;
+//             font-weight: 350;
+//         }
+//     }
+//     .cardiv:hover{
+//         cursor: pointer;
+//         transition: .2s;
+//         background: $pink;
+//         transform: scale(1.1);
+//     }
+// }
+// .logoutbuttondiv{
+//     text-align: center;
+// }
+// .logoutbutton{
+//     margin:2% auto !important;
+//     padding:.8% 3%;
+// }
 
-}
+// }
 
 
 @media (max-width: 992px) {

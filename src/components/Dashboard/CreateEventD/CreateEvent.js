@@ -91,7 +91,7 @@ function CreateEvent(props) {
          
         {/* auto compelte html */}
 
-        {/* <PlacesAutocomplete
+        <PlacesAutocomplete
         value={address}
         onChange={handleChange}
         onSelect={handleSelect}
@@ -128,7 +128,7 @@ function CreateEvent(props) {
             </div>
           </div>
         )}
-      </PlacesAutocomplete> */}
+      </PlacesAutocomplete>
 
       {/* auto complete html end */}
 
@@ -142,7 +142,7 @@ function CreateEvent(props) {
 
     <GoogleMapReact
     onClick={(ar)=>handlePress(ar)}
-      bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
+      bootstrapURLKeys={{ key: 'AIzaSyC4e6FM7KdtXRbtgqe0mMtMoKDRgkn3nik'}}
       defaultCenter={location.center}
       defaultZoom={location.zoom}
     >

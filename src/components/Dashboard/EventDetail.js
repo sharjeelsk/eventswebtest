@@ -122,7 +122,10 @@ function EventDetail(props) {
          </span>
 
         <div onClick={()=>setDisplay(false)}>
-        <div style={{ height: '50vh', width: '100%' }}>
+      
+       
+       <div className='shadow-sm eventDetaildiv'>
+       <div style={{ height: '80vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
           defaultCenter={location.center}
@@ -140,8 +143,6 @@ function EventDetail(props) {
       />
         </GoogleMapReact>
         </div>
-       
-       <div className='shadow-sm eventDetaildiv'>
         <div className="row">
         <div className="col-10">
         <h1>{details.name}</h1>
@@ -163,11 +164,11 @@ function EventDetail(props) {
         <p><HourglassEmptyIcon /> Start : {moment.parseZone(details.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
         <p><HourglassFullIcon /> End : {moment.parseZone(details.end).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
         </div>
-        <p>{details.eventAddress}</p>
-        <p>{details.description}</p>
+        <p><b>Address : </b>{details.eventAddress}</p>
+        <p><b>Description : </b>{details.description}</p>
 
         {details.organiserId!==props.user.userInfo._id &&details.status.toLowerCase()!=="over"?<div style={{textAlign:"center"}}>
-        <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>
+        {details.allowContact && <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>}
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
         </div>:null}
         </div>

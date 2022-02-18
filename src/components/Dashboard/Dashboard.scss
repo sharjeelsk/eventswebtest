@@ -42,15 +42,16 @@ h1{
   .cardhead{
     margin:2%;
     background: linear-gradient(to bottom right, $extraLightPink, $lightPink, $pink);
-    border-radius: 5px;
+    border-radius: 10px;
     padding:1% 2%;
     h2{
       color: $purple;
-      font-weight: 700;
+      font-weight: 600;
+      font-size: 1.9em;
     }
+    
     .subs{
-      font-weight: bold;
-      color: $purple;
+      color: #a1a1a1;
     }
     .chipdiv{
       margin-bottom: 3%;
@@ -62,6 +63,23 @@ h1{
         margin-right: 3%;
       }
       
+    }
+    .descriptioncontainer{
+      h5{
+        margin-bottom: 0;
+      }
+      p{
+        margin-top: 1%;
+      }
+    }
+    .timecontainer{
+      margin:5% 1%;
+      background-color: #23014411;
+      color: black;
+      padding:3%;
+      border-radius: 10px;
+      .starts{
+      }
     }
     .start{
       color: #009211;
