@@ -136,6 +136,9 @@ function MyAccount(props) {
                     <ArrowForwardIosIcon />
                 </div>
             </div>
+            <div style={{textAlign:"center"}}>
+        <Button onClick={()=>handleLogout()} className="logoutbutton" variant="contained">Logout <LogoutIcon sx={{marginLeft:1}} /></Button>
+        </div>
 
         </div>
         

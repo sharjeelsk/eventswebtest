@@ -81,6 +81,7 @@ const Otp = (props) => {
                   </span>
                 }
                 value={otpsep}
+                shouldAutoFocus
                 onChange={handleOtpChange}
                 numInputs={6}
                 inputStyle={{
