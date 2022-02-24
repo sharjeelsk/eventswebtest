@@ -23,13 +23,13 @@ console.log(props);
 	<div className="collapse navbar-collapse" id="navbarResponsive">
 		<ul className="navbar-nav ml-auto" id="nav">
 			<li className="nav-item">
-			{props.id==="2"?<Link  className="nav-link active" to="/aboutus">About Us</Link>:<Link  className="nav-link"  to="/aboutus">About Us</Link>}
+			{props.id==="2"?<Link  className="nav-link active" to="/privacypolicy">Privacy Policy</Link>:<Link  className="nav-link"  to="/privacypolicy">Privacy Policy</Link>}
 			</li>
 			<li className="nav-item">
-			{props.id==="3"?<Link  className="nav-link active" to="/services">Services</Link>:<Link  className="nav-link"  to="/services">Services</Link>}
+			{props.id==="3"?<Link  className="nav-link active" to="/howitworks">How it works</Link>:<Link  className="nav-link"  to="/howitworks">How it works</Link>}
 			</li>
 			<li className="nav-item">
-			{props.id==="4"?<Link  className="nav-link active" to="/privacypolicy">Projects</Link>:<Link  className="nav-link"  to="/privacypolicy">Projects</Link>}
+			{props.id==="4"?<Link  className="nav-link active" to="/terms">Terms</Link>:<Link  className="nav-link"  to="/terms">Terms</Link>}
 			</li>
 			<li className="nav-item">
 			{props.userToken?

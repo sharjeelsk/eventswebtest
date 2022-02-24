@@ -95,7 +95,7 @@ function MyAccount(props) {
 
                 <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
                     <p className="key">Email</p>
-                    <p className="value">{userInfo.email}</p>
+                    <p className="value" style={{width:"50%"}}>{userInfo.email}</p>
                 </div>
 
                 <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">

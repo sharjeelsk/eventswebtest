@@ -88,13 +88,21 @@ const Home = () => {
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <h2>Create an Event</h2>
-                    <p>Occaecat laborum cupidatat amet in laboris officia officia amet adipisicing dolor ex. Sunt velit veniam ut non Lorem cupidatat incididunt culpa occaecat. Commodo sit culpa laborum amet velit non ea. Cupidatat consequat cupidatat esse est quis eiusmod officia in dolor officia aliqua anim. Commodo magna eu mollit aliquip veniam officia ut laborum culpa esse veniam nulla in duis. Nulla laborum laboris reprehenderit sint aliquip eiusmod id adipisicing reprehenderit ad est sint Lorem nisi. Labore laborum ea et amet dolore non.</p>
+                    <p>
+                    This is event creation page which has various fields such as name of the event, start date and time,
+end date and time, description, event address, public or private event, if private event then it asks
+for the mobile numbers of users whom organizer want to invite to this particular, so they’ll be
+automatically subscribed to this event. 
+
+                    </p>
                 </div>
             </div>
             <div className="row my-5">
                 <div className="alignright col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <h2>Subscribe an Event</h2>
-                    <p>Occaecat laborum cupidatat amet in laboris officia officia amet adipisicing dolor ex. Sunt velit veniam ut non Lorem cupidatat incididunt culpa occaecat. Commodo sit culpa laborum amet velit non ea. Cupidatat consequat cupidatat esse est quis eiusmod officia in dolor officia aliqua anim. Commodo magna eu mollit aliquip veniam officia ut laborum culpa esse veniam nulla in duis. Nulla laborum laboris reprehenderit sint aliquip eiusmod id adipisicing reprehenderit ad est sint Lorem nisi. Labore laborum ea et amet dolore non.</p>
+                    <p>
+                    You can subscribe to events to get the latest notifications from those events. You can find a Subscribe button under any event you created. Once you subscribe to a event, any new notification it publishes will show up in your notification feed.
+                    </p>
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <Subscribe className="svg" />
@@ -107,7 +115,9 @@ const Home = () => {
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <h2>Vendor an Event</h2>
-                    <p>Occaecat laborum cupidatat amet in laboris officia officia amet adipisicing dolor ex. Sunt velit veniam ut non Lorem cupidatat incididunt culpa occaecat. Commodo sit culpa laborum amet velit non ea. Cupidatat consequat cupidatat esse est quis eiusmod officia in dolor officia aliqua anim. Commodo magna eu mollit aliquip veniam officia ut laborum culpa esse veniam nulla in duis. Nulla laborum laboris reprehenderit sint aliquip eiusmod id adipisicing reprehenderit ad est sint Lorem nisi. Labore laborum ea et amet dolore non.</p>
+                    <p>
+                    You can vendor any event of your choice. you can provide various services to an event by looking at the service tags associated to the event. Service tags will help you place a bid on that event and similarly event organizer will accept your bid if he likes your proposal
+                    </p>
                 </div>
             </div>
 
@@ -120,9 +130,7 @@ const Home = () => {
             <div className="thirdsection">
             <h1 className="headingwithpad">Why choose events?</h1>
             <p>
-                Eiusmod exercitation do ullamco in duis esse ullamco sint culpa aliquip. Esse dolor consequat aliqua et Lorem consequat esse nulla proident tempor. Cupidatat sit et culpa dolor reprehenderit occaecat. Et excepteur deserunt magna labore deserunt.
-
-Ut ullamco qui veniam exercitation cillum minim adipisicing laboris proident pariatur fugiat. Tempor eiusmod sint nulla id sit velit laboris aute labore excepteur consectetur ad. Aliquip do in nisi sunt nisi in ut. Aliqua consequat magna id dolore mollit quis dolor mollit exercitation ullamco fugiat dolor duis sint.
+            An event is an effective channel for the streamlined delivery of effective and engaging communications. By adopting a single mobile solution for every meeting or event year round, event mangers are able to focus on driving attendance and engagement, rather than wasting paper and ink.
             </p>
             </div>
 
@@ -133,19 +141,41 @@ Ut ullamco qui veniam exercitation cillum minim adipisicing laboris proident par
             <h1 className="headingwithpad">Our happy users</h1>
                 <div className="row justify-content-between">
                     <div className="shadow col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                        <h2>Fida Patel</h2>
+                        <h2>Gireesh</h2>
                         <Rating name="read-only" className="mb-4" value={5} readOnly />
-                        <p>Voluptate sunt cupidatat fugiat fugiat amet esse sint incididunt commodo aliqua officia. Consectetur ullamco pariatur labore magna ut sit dolor ex cupidatat consequat in dolor eiusmod. Anim eu ullamco officia adipisicing.</p>
+                        <p>
+                        This site definitely  appeals to the average person because the layout
+is so  simple  but very  VERY  effective.  It is a clean  site  with a
+flawless  look, and someone  without any  technical  background  would
+definitely  appreciate  it.  The layout makes anyone feel  comfortable
+because it is so well done and clean  looking.  You feel as if you are
+in good hands and you know that you will be able to find  anything you
+need on this site.
+                        </p>
                     </div>
                     <div className="shadow col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                        <h2>Lorem Epsum</h2>
+                        <h2>Vishnu</h2>
                         <Rating name="read-only" className="mb-4" value={5} readOnly />
-                        <p>Voluptate sunt cupidatat fugiat fugiat amet esse sint incididunt commodo aliqua officia. Consectetur ullamco pariatur labore magna ut sit dolor ex cupidatat consequat in dolor eiusmod. Anim eu ullamco officia adipisicing.</p>
+                        <p>
+                        The load time of the page is quite  fast,  even with the  moving  link
+buttons.  I did not find any typos or broken  links,  just  very  well
+written  information!  There are  sufficient  meta tags on the  pages.
+The  CharityFocus  logo is present on the main page but not on the sub
+pages.  Overall a great site with not only great design but  excellent
+content as well.  Great job to everyone involved.
+                        </p>
                     </div>
                     <div className="shadow col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                        <h2>Lorem Epsum</h2>
+                        <h2>John Doe</h2>
                         <Rating name="read-only" className="mb-4" value={5} readOnly />
-                        <p>Voluptate sunt cupidatat fugiat fugiat amet esse sint incididunt commodo aliqua officia. Consectetur ullamco pariatur labore magna ut sit dolor ex cupidatat consequat in dolor eiusmod. Anim eu ullamco officia adipisicing.</p>
+                        <p>
+                        This site  would  appeal to the  average  person in the way that it is
+very simply  done, and  everything  is very easy to find.  There is no
+messing  around  here, just the  information  that they want to convey
+presented in the simplest way possible.  People with no technical back
+ground  would  definitely   appreciate  the  simplicity  and  ease  of
+navigation in this site.
+                        </p>
                     </div>
                 </div>
 

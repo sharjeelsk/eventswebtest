@@ -24,8 +24,8 @@ function Footer(props) {
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 footercol">
             <h2>Links <LinkIcon sx={{fontSize:"1.5em"}}/></h2>
             <p><Link className="link" to="/privacypolicy">Privacy Policy</Link></p>
-            <p><Link className="link" to="/privacypolicy">Terms of use</Link></p>
-            <p><Link className="link" to="/privacypolicy">How it works</Link></p>
+            <p><Link className="link" to="/terms">Terms of use</Link></p>
+            <p><Link className="link" to="/howitworks">How it works</Link></p>
             <p><Link className="link" to="/privacypolicy">FAQ's</Link></p>
             </div>
 

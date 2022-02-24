@@ -28,6 +28,9 @@ import MyGroups from "./components/Dashboard/MyAccount/MyGroups/MyGroups";
 import FillFeedbackForm from "./components/Dashboard/MySubscription/FillFeedbackForm";
 import CrudGroup from './components/Dashboard/MyAccount/MyGroups/CrudGroup'
 import Developers from "./components/Pages/Developers/Developers";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import HowItWorks from "./components/HowItWorks/HowItWorks";
+import Terms from './components/Terms/Terms'
 
 
 function App() {
@@ -61,6 +64,9 @@ function App() {
       <Route path="/fillfeedbackform" component={FillFeedbackForm} />
       <Route path="/crudgroup" component={CrudGroup} />
       <Route path="/developers" component={Developers} />
+      <Route path="/privacypolicy" component={PrivacyPolicy} />
+      <Route path="/howitworks" component={HowItWorks} />
+      <Route path="/terms" component={Terms} />
     </Switch>
   );
 }

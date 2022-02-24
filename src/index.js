@@ -9,11 +9,11 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const theme = createTheme({
   typography: {
-    "fontFamily": `'El Messiri', 'sans-serif'`,
+    "fontFamily": `'Poppins', 'sans-serif'`,
     "fontSize": 14,
     "fontWeightLight": 500,
     "fontWeightRegular": 500,
-    "fontWeightMedium": 700
+    "fontWeightMedium": 500
    },
   palette: {
     primary: {
