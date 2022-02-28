@@ -22,6 +22,7 @@ function CreateEvent(props) {
     const [display,setDisplay]=React.useState(false)
     const [location,setLocation]=React.useState({center:{lat:59.95,lng:30.33},zoom:11})
     const [eventLocation,setEventLocation]=React.useState({})
+    const [eventCenter,setEventCenter]=React.useState({})
     const [loc,setLoc]=React.useState([])
     const [error,setError]=React.useState("")
     const [address,setAddress]=React.useState("")
@@ -66,7 +67,11 @@ function CreateEvent(props) {
     const handleSelect = address => {
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
-        .then(latLng => console.log('Success', latLng))
+        .then(latLng => {
+          console.log('Success', latLng)
+          let {lat,lng}=latLng
+          setEventCenter({center:{lat,lng},zoom:18})
+        })
         .catch(error => console.error('Error', error));
     };
 
@@ -91,13 +96,13 @@ function CreateEvent(props) {
          
         {/* auto compelte html */}
 
-        {/* <PlacesAutocomplete
+        <PlacesAutocomplete
         value={address}
         onChange={handleChange}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div className='autocomplete-container'>
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
@@ -128,7 +133,7 @@ function CreateEvent(props) {
             </div>
           </div>
         )}
-      </PlacesAutocomplete> */}
+      </PlacesAutocomplete>
 
       {/* auto complete html end */}
 
@@ -145,6 +150,7 @@ function CreateEvent(props) {
       bootstrapURLKeys={{ key: 'AIzaSyC4e6FM7KdtXRbtgqe0mMtMoKDRgkn3nik'}}
       defaultCenter={location.center}
       defaultZoom={location.zoom}
+      center={Object.keys(eventCenter).length>0&&eventCenter.center}
     >
       <OwnMarker 
       lat = {location.center.lat}

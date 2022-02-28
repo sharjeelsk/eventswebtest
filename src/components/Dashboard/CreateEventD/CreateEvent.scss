@@ -5,6 +5,29 @@
     h1{
         font-size: 3em;
     }
+    .autocomplete-container{
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin: 1% 0;
+        padding: 0 10%;
+        input{
+            width: 100%;
+            padding: 1%;
+            border-radius: 30px;
+            border: 2px solid #f7f7f7;
+            outline: none;
+        }
+        .suggestion-item{
+            margin: 0 1%;
+            padding: 1%;
+        }
+        .suggestion-item--active{
+            margin: 0 1%;
+            padding: 1%;
+
+        }
+    }
 }
 
 .createEventDiv2{
