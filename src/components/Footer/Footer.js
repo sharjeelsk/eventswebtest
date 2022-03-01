@@ -15,7 +15,7 @@ function Footer(props) {
         <div className={`row mx-auto ${props.footer}`} >
 
             <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 footercol">
-            <h2 style={{fontSize:"3.5em"}}>Events</h2>
+            <h2 style={{fontSize:"3.5em"}}>EventPickl</h2>
             <p>Make sure to read our terms and policy before use</p>
             <p>© 2022</p>
             <p>Designed and developed by <a style={{color:"#5a1e96"}} href="https://tgsharjeel.vercel.app/">techgeeks</a></p>

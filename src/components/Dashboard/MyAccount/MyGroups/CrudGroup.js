@@ -33,7 +33,8 @@ function CrudGroup(props) {
     },[])
 
     const handleSubmit = ()=>{
-        
+      
+       console.log(mobileNumberList) 
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/userContact/create-userContact`,{groupName:groupName,list:mobileNumberList},{headers:{token:props.user.user}})
                        .then(res=>{
                            console.log(res);
@@ -57,7 +58,6 @@ function CrudGroup(props) {
         }
         
     }
-console.log(Object.entries(mobileNumberList));
     const renderChip =()=>{
        return Object.keys(mobileNumberList).length>0?Object.entries(mobileNumberList).map((item,index)=>(
         <Chip

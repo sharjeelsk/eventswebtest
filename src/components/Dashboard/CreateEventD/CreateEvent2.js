@@ -29,7 +29,7 @@ import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 import fx from 'money'
 function CreateEvent2(props) {
-    const {register,handleSubmit,formState:{errors}}=useForm()
+    const {register,handleSubmit,formState:{errors},setValue}=useForm()
     let userInfo = props.user.userInfo
     let startDate = new Date()
     let endDate = date.addHours(startDate,24)
@@ -69,6 +69,9 @@ function CreateEvent2(props) {
 
     React.useEffect(()=>{
       getCurr()
+      if(props.location.state.addressSuggestion!==""){
+          setValue("eventAddress",props.location.state.addressSuggestion)
+      }
       console.log(fx)
         axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/category/all-category`,{headers:{token:props.user.user}})
         .then(res=>{
@@ -120,7 +123,7 @@ function CreateEvent2(props) {
         description:data.description, 
         type:type.toUpperCase(),
         contacts:GroupList,
-        location:props.location.state, 
+        location:props.location.state.eventLocation, 
         start:start, 
         end:end, 
         reqServices:tagList,

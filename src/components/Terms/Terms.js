@@ -113,8 +113,9 @@ In the event that any of the terms, conditions, and notices contained herein con
 
 
 </p>
-<Footer footer="fullfooter" />
 </div>
+<Footer footer="fullfooter" />
+
     </div>
   )
 }

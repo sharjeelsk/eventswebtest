@@ -483,8 +483,9 @@ References
 9. https://www.npmjs.com/
 10. https://reactnative.dev/docs/getting-started
 </p>
-<Footer footer="fullfooter" />
 </div>
+<Footer footer="fullfooter" />
+
     </div>
   )
 }

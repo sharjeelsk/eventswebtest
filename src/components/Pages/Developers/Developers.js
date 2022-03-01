@@ -51,7 +51,7 @@ function Developers() {
                     <p>Python / Django / Wordpress Developer</p>
                 </div>
             </div>
-            <Footer />
+            <Footer footer="fullfooter" />
         </div>
     )
 }

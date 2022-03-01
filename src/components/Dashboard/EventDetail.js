@@ -128,7 +128,7 @@ function EventDetail(props) {
        <div style={{ height: '80vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
-          defaultCenter={location.center}
+          defaultCenter={{lat:details.location.latitude,lng:details.location.longitude}}
           defaultZoom={location.zoom}
         >
          <OwnMarker 

@@ -26,6 +26,7 @@ function CreateEvent(props) {
     const [loc,setLoc]=React.useState([])
     const [error,setError]=React.useState("")
     const [address,setAddress]=React.useState("")
+    const [addressSuggestion,setAddressSuggestion]=React.useState("")
 
  
 
@@ -116,6 +117,7 @@ function CreateEvent(props) {
                   ? 'suggestion-item--active'
                   : 'suggestion-item';
                 // inline style for demonstration purpose
+                setAddressSuggestion(suggestion.description)
                 const style = suggestion.active
                   ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
@@ -166,7 +168,7 @@ function CreateEvent(props) {
   </div>
         
   <div 
-  onClick={()=>{console.log("h");props.history.push("/createevent2",eventLocation)}}
+  onClick={()=>{console.log("h");props.history.push("/createevent2",{eventLocation,addressSuggestion})}}
   style={{position:"fixed",bottom:"5%",right:"5%"}}>
               <Tooltip title="Create Event">
               <Fab  disabled={Object.keys(eventLocation).length>0?false:true} variant="extended" onClick={()=>null} color="primary" aria-label="add">
