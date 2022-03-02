@@ -19,8 +19,8 @@ import Alert from '@mui/material/Alert'
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import axios from 'axios'
 import {connect} from 'react-redux'
-
-
+import Chip from '@mui/material/Chip';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import SimpleBackdrop from '../utils/SimpleBackdrop';
 function EventDetail(props) {
     const [display,setDisplay]=React.useState(false)
@@ -159,6 +159,12 @@ function EventDetail(props) {
         <span className="status-active">{details.type}</span>
         <span className="status-red">{details.status}</span>
         </div>
+
+        {
+          details.reqServices.length>0&&details.reqServices.map((item,index)=>(
+            <Chip className='mt-5' label={item} key={index} icon={<LocalOfferIcon />} />
+          ))
+        }
 
         <div className="row justify-content-around timediv">
         <p><HourglassEmptyIcon /> Start : {moment.parseZone(details.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
