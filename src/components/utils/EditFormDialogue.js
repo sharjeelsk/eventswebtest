@@ -9,9 +9,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import {connect} from 'react-redux'
-
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+const Input = styled('input')({
+  display: 'none',
+});
 function FormDialog(props) {
     const {register,handleSubmit,formState:{errors},setValue}=useForm()
+    const [selectedImage,setSelectedImage]=React.useState([])
+    console.log(selectedImage)
     React.useEffect(()=>{
         setValue("name",props.user.userInfo.name)
         setValue("emailaddress",props.user.userInfo.email)
@@ -22,6 +30,7 @@ function FormDialog(props) {
 
     const onSubmit = (data)=>{
         console.log(data)
+        
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/edit-user`,[
             {"propName" : "name", "value": data.name},
             {"propName" : "email", "value": data.emailaddress},
@@ -32,10 +41,24 @@ function FormDialog(props) {
           ],{headers:{'token':props.user.user}})
           .then(res=>{
             console.log(res);
-            props.setOpen(false)
-            props.getUser()
-            
-            
+            const formdata = new FormData();
+                if(!Array.isArray(selectedImage)){
+                  formdata.append('image',selectedImage)
+                console.log(formdata)
+                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/user/upload`,formdata,{headers:{Accept:'application/json','Content-Type':"multipart/form-data",token:props.user.user}})
+                .then(res=>{
+                    console.log(res);
+                    props.setOpen(false)
+                    props.getUser()
+                  
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+              }else{
+                props.setOpen(false)
+                    props.getUser()
+              }
           })
           .catch(err=>{
             console.log(err)
@@ -103,6 +126,35 @@ function FormDialog(props) {
             fullWidth
             variant="standard"
           />
+{!Array.isArray(selectedImage)?(
+        <div className="my-3 row justify-content-center">
+        <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+        <IconButton onClick={()=>setSelectedImage([])} aria-label="delete" size="small" color='error'>
+        <DeleteIcon fontSize="inherit" />
+      </IconButton>
+        </div>
+      ):null}
+
+            <div className="mt-4 mb-2" style={{textAlign:"center"}}>
+            <label htmlFor="contained-button-file">
+            <Input 
+             onChange={(event) => {
+                console.log(event.target.files);
+                setSelectedImage(event.target.files[0]);
+              }}
+            accept="image/*" id="contained-button-file" multiple type="file" />
+            <Button variant="contained" component="span" endIcon={<CameraAltIcon />}>
+            Upload image
+            </Button>
+            </label>
+            </div>
+
+
+
+
+
+
+
         </DialogContent>
         <DialogActions>
           <Button onClick={()=>props.setOpen(false)}>Cancel</Button>

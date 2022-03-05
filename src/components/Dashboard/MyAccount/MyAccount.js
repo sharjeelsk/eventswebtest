@@ -63,6 +63,12 @@ function MyAccount(props) {
         props.history.push("/")
 
     }
+
+
+    const renderEmail = (email)=>{
+
+    }
+
     return (
         <div className="row myaccountdiv">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -95,7 +101,10 @@ function MyAccount(props) {
 
                 <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
                     <p className="key">Email</p>
-                    <p className="value" style={{width:"50%"}}>{userInfo.email}</p>
+                    {
+                        userInfo.email.split("@").map((item,index)=><p className="value" style={{fontSize:"90%"}} >{item}{index===0&&"@"}</p>)
+                    }
+                    
                 </div>
 
                 <div className="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3 infodiv">
