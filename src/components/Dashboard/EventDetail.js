@@ -125,7 +125,7 @@ function EventDetail(props) {
       
        
        <div className='shadow-sm eventDetaildiv'>
-       <div style={{ height: '80vh', width: '100%' }}>
+       <div style={{ height: '40vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBOzAkOqCVMjP4hXIkabfHi40vJ8afKKZ4'}}
           defaultCenter={{lat:details.location.latitude,lng:details.location.longitude}}
