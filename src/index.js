@@ -80,7 +80,7 @@ const theme = createTheme({
 ReactDOM.render(
   <Provider store={store}>
   <PersistGate loading={null} persistor={Persister}>
-    <BrowserRouter>
+    <BrowserRouter basename='/test'>
     <ThemeProvider theme={theme}>
     <App />
     </ThemeProvider>

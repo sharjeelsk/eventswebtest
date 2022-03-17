@@ -85,7 +85,7 @@ const Dashboard = (props) => {
               console.log(err);
             })
     }
-    console.log(data);
+    console.log("all events",data);
     const setSearchResult=(e)=>{
       if(e.length<=0){
         getEvent()
@@ -131,6 +131,7 @@ const Dashboard = (props) => {
       text="My Location"
       />
           {data.map((marker,index)=>(
+            marker.location.latitude&&
             <Marker
             lat={marker.location.latitude}
             lng={marker.location.longitude}

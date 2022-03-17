@@ -1,5 +1,5 @@
 import "./App.scss"
-import {Route,Switch} from 'react-router-dom'
+import {Route,Switch,Redirect} from 'react-router-dom'
 import Home from './components/Home'
 import SignUp from "./components/SignUp/SignUp";
 import Otp from './components/SignUp/Otp'
@@ -36,7 +36,8 @@ import Terms from './components/Terms/Terms'
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" render={()=><Redirect to="/home" />} />
+      <Route exact path="/home" component={Home} />
       <Route path="/eventdetail" component={EventDetail} />
       <Route path="/signup" component={SignUp} />
       <Route path="/otp" component={Otp} />
